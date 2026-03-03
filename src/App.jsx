@@ -138,8 +138,8 @@ const FeatureShuffler = () => {
     const interval = setInterval(() => {
       setCards(prev => {
         const arr = [...prev];
-        const last = arr.pop();
-        arr.unshift(last);
+        const first = arr.shift();
+        arr.push(first);
         return arr;
       });
     }, 3000);
@@ -155,7 +155,7 @@ const FeatureShuffler = () => {
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
-      <div className="absolute bottom-3 right-6 w-48 opacity-[0.35]">
+      <div className="absolute bottom-3 right-6 w-48 opacity-50">
         {cards.map((card, i) => {
           const isTop = i === 0;
           return (
