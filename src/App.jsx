@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, Code, Database, Fingerprint, Activity, MousePointer2 } from 'lucide-react';
+import { InteractiveGlobe } from '@/components/ui/interactive-globe';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,40 +69,55 @@ const Hero = () => {
         ease: 'power3.out',
         delay: 0.2,
       });
+      gsap.from('.hero-globe', {
+        opacity: 0,
+        scale: 0.9,
+        duration: 1.5,
+        ease: 'power3.out',
+        delay: 0.5,
+      });
     }, container);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={container} className="relative h-screen w-full flex items-end justify-start pb-24 md:pb-32 px-6 md:px-16 overflow-hidden">
-      {/* Background Image & Overlay */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80)' }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent"></div>
-        <div className="absolute inset-0 bg-accent/5 mix-blend-screen"></div>
-      </div>
+    <section ref={container} className="relative min-h-screen w-full flex items-center overflow-hidden px-6 md:px-16">
+      {/* Ambient glow */}
+      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none"></div>
 
-      <div className="relative z-10 max-w-4xl space-y-6">
-        <div className="hero-elem data-mono text-accent flex items-center gap-3">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-          System Online _
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-16 pt-32 pb-24">
+        {/* Left -- Content */}
+        <div className="flex-1 space-y-6">
+          <div className="hero-elem data-mono text-accent flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            System Online _
+          </div>
+
+          <h1 className="flex flex-col text-6xl md:text-8xl lg:text-9xl text-white">
+            <span className="hero-elem heading-sans">Command the</span>
+            <span className="hero-elem text-drama text-accent mt-2 ml-4">Future.</span>
+          </h1>
+
+          <p className="hero-elem text-lg md:text-xl text-text/80 max-w-xl font-light font-sans mt-8 mb-12 border-l border-white/20 pl-6 py-2">
+            We don't sell chatbots. We build custom AI operating systems that turn SMB CEOs from operators into architects.
+          </p>
+
+          <div className="hero-elem pt-4">
+            <a href="#pricing" className="btn-magnetic px-8 py-4 rounded-full bg-white text-black text-lg gap-2">
+              <span className="relative z-10 font-bold tracking-tight">Access Secure Relay</span>
+            </a>
+          </div>
         </div>
 
-        <h1 className="flex flex-col text-6xl md:text-8xl lg:text-9xl text-white">
-          <span className="hero-elem heading-sans">Command the</span>
-          <span className="hero-elem text-drama text-accent mt-2 ml-4">Future.</span>
-        </h1>
-
-        <p className="hero-elem text-lg md:text-xl text-text/80 max-w-xl font-light font-sans mt-8 mb-12 border-l border-white/20 pl-6 py-2">
-          We don’t sell chatbots. We build custom AI operating systems that turn SMB CEOs from operators into architects.
-        </p>
-
-        <div className="hero-elem pt-4">
-          <a href="#pricing" className="btn-magnetic px-8 py-4 rounded-full bg-white text-black text-lg gap-2">
-            <span className="relative z-10 font-bold tracking-tight">Access Secure Relay</span>
-          </a>
+        {/* Right -- Globe */}
+        <div className="hero-globe flex-1 flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
+          <InteractiveGlobe
+            size={500}
+            dotColor="rgba(139, 92, 246, ALPHA)"
+            arcColor="rgba(139, 92, 246, 0.4)"
+            markerColor="rgba(167, 139, 250, 1)"
+            autoRotateSpeed={0.003}
+          />
         </div>
       </div>
     </section>
@@ -139,18 +155,18 @@ const FeatureShuffler = () => {
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
-      <div className="absolute top-1/2 right-6 -translate-y-1/2 w-48 h-40">
+      <div className="absolute top-[60%] right-6 -translate-y-1/2 w-48 h-40">
         {cards.map((card, i) => {
           const isTop = i === 0;
           return (
             <div
               key={card.id}
-              className="absolute w-full p-4 rounded-2xl border border-white/10 bg-background/80 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col gap-2"
+              className="absolute w-full p-4 rounded-2xl border border-white/5 bg-background/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col gap-2"
               style={{
                 transform: `translateY(${i * 12}px) scale(${1 - i * 0.05})`,
-                opacity: 1 - i * 0.3,
+                opacity: (1 - i * 0.3) * 0.35,
                 zIndex: 10 - i,
-                boxShadow: isTop ? '0 10px 30px -10px rgba(0,0,0,0.5)' : 'none'
+                boxShadow: 'none'
               }}
             >
               <div className="text-xs text-text/50 font-mono flex justify-between">
@@ -366,7 +382,7 @@ const Protocol = () => {
 
   const steps = [
     { num: '01', title: 'Context & Diagnosis', desc: "We map your workflow. The system doesn't learn generalities; it learns your specific business.", graphic: <div className="w-24 h-24 border-2 border-accent/40 rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite]"><div className="w-16 h-16 border-2 border-accent/60 rounded-full animate-[spin_5s_linear_infinite_reverse]"></div></div> },
-    { num: '02', title: 'Data Integration', desc: "We pipe your tools directly into the brain. Revenue, pipeline, metrics — synthesized automatically.", graphic: <div className="flex gap-2"><div className="w-1 h-24 bg-accent/20 animate-pulse delay-75"></div><div className="w-1 h-16 bg-accent/60 animate-pulse delay-150 mt-4"></div><div className="w-1 h-32 bg-accent animate-pulse delay-300 -mt-4"></div><div className="w-1 h-20 bg-accent/40 animate-pulse delay-700"></div></div> },
+    { num: '02', title: 'Data Integration', desc: "We pipe your tools directly into the brain. Revenue, pipeline, metrics -- synthesized automatically.", graphic: <div className="flex gap-2"><div className="w-1 h-24 bg-accent/20 animate-pulse delay-75"></div><div className="w-1 h-16 bg-accent/60 animate-pulse delay-150 mt-4"></div><div className="w-1 h-32 bg-accent animate-pulse delay-300 -mt-4"></div><div className="w-1 h-20 bg-accent/40 animate-pulse delay-700"></div></div> },
     { num: '03', title: 'Command Operations', desc: "Deploy specialized multi-agent systems to execute workflows and deliver daily intel briefs.", graphic: <div className="w-24 h-24 rounded-lg bg-gradient-to-tr from-accent/10 to-transparent border border-white/10 flex items-center justify-center"><Fingerprint className="w-12 h-12 text-accent" /></div> }
   ];
 
@@ -424,9 +440,9 @@ const Pricing = () => {
               <li className="flex gap-3 items-center"><span className="text-accent">+</span> Workflow Mapping</li>
               <li className="flex gap-3 items-center"><span className="text-accent">+</span> Friction Analysis</li>
             </ul>
-            <button className="btn-magnetic w-full py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5">
+            <a href="https://calendly.com/acuna-carlosandres/30min" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 text-center block">
               <span className="relative z-10">Book Audit Call</span>
-            </button>
+            </a>
           </div>
 
           {/* Tier 2 (Focus) */}
@@ -442,9 +458,9 @@ const Pricing = () => {
               <li className="flex gap-3 items-center"><span className="text-accent">+</span> 2 Custom Automations</li>
               <li className="flex gap-3 items-center"><span className="text-accent">+</span> Direct Support</li>
             </ul>
-            <button className="btn-magnetic w-full py-4 rounded-full bg-accent text-white font-bold tracking-wide">
+            <a href="https://calendly.com/acuna-carlosandres/30min" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full py-4 rounded-full bg-accent text-white font-bold tracking-wide text-center block">
               <span className="relative z-10">Implement Assistant</span>
-            </button>
+            </a>
           </div>
 
           {/* Tier 3 */}
@@ -457,9 +473,9 @@ const Pricing = () => {
               <li className="flex gap-3 items-center"><span className="text-accent">+</span> Unlimited Automations</li>
               <li className="flex gap-3 items-center"><span className="text-accent">+</span> Private Infrastructure</li>
             </ul>
-            <button className="btn-magnetic w-full py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5">
+            <a href="https://calendly.com/acuna-carlosandres/30min" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 text-center block">
               <span className="relative z-10">Install Full OS</span>
-            </button>
+            </a>
           </div>
 
         </div>
