@@ -155,7 +155,7 @@ const FeatureShuffler = () => {
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
-      <div className="absolute bottom-3 right-6 w-48 opacity-[0.12]">
+      <div className="absolute bottom-3 -right-6 w-48 opacity-[0.35]">
         {cards.map((card, i) => {
           return (
             <div
