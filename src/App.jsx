@@ -155,23 +155,22 @@ const FeatureShuffler = () => {
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
-      <div className="absolute bottom-4 right-6 w-48 h-40">
+      <div className="absolute bottom-3 right-6 w-48 opacity-[0.12]">
         {cards.map((card, i) => {
-          const isTop = i === 0;
           return (
             <div
               key={card.id}
-              className="absolute w-full p-4 rounded-2xl border border-white/5 bg-background/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col gap-2"
+              className="absolute w-full p-4 rounded-2xl border border-white/5 bg-background/30 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col gap-2"
               style={{
-                transform: `translateY(${i * 12}px) scale(${1 - i * 0.05})`,
-                opacity: (1 - i * 0.3) * 0.15,
+                bottom: `${i * 12}px`,
+                transform: `scale(${1 - i * 0.05})`,
+                opacity: 1 - i * 0.3,
                 zIndex: 10 - i,
-                boxShadow: 'none'
               }}
             >
               <div className="text-xs text-text/50 font-mono flex justify-between">
                 <span>Process_{card.id}</span>
-                <span className={isTop ? 'text-accent' : ''}>{card.data}</span>
+                <span>{card.data}</span>
               </div>
               <div className="text-sm font-semibold truncate">{card.title}</div>
             </div>
