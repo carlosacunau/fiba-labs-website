@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo_icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>FIBA Labs | Command the Future</title>
+  </head>
+  <body class="bg-[#0A0A14] text-[#E8E4F0] font-sans antialiased overflow-x-hidden selection:bg-[#8B5CF6]/30">
+    <!-- Visual Texture: SVG Noise -->
+    <svg width="0" height="0" class="pointer-events-none fixed z-[-1]">
+      <filter id="noiseFilter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+      </filter>
+    </svg>
+    <div class="fixed inset-0 pointer-events-none z-50 opacity-[0.05]" style="filter: url(#noiseFilter);"></div>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
