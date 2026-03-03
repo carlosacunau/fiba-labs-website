@@ -151,7 +151,7 @@ const FeatureShuffler = () => {
       <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
       <div className="z-10 w-full flex flex-col pt-2">
         <Database className="w-6 h-6 text-accent mb-4" />
-        <h3 className="text-xl font-bold mb-2">Unified Command Center</h3>
+        <h3 className="text-xl font-bold mb-2">Unified Command Center1</h3>
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
