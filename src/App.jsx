@@ -155,8 +155,9 @@ const FeatureShuffler = () => {
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
-      <div className="absolute bottom-3 -right-6 w-48 opacity-[0.35]">
+      <div className="absolute bottom-3 right-6 w-48 opacity-[0.35]">
         {cards.map((card, i) => {
+          const isTop = i === 0;
           return (
             <div
               key={card.id}
@@ -170,7 +171,7 @@ const FeatureShuffler = () => {
             >
               <div className="text-xs text-text/50 font-mono flex justify-between">
                 <span>Process_{card.id}</span>
-                <span>{card.data}</span>
+                <span className={isTop ? 'text-accent' : ''}>{card.data}</span>
               </div>
               <div className="text-sm font-semibold truncate">{card.title}</div>
             </div>
