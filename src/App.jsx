@@ -155,7 +155,7 @@ const FeatureShuffler = () => {
         <p className="text-sm text-text/60">Your data, mapped and synchronized autonomously.</p>
       </div>
 
-      <div className="absolute top-[60%] right-6 -translate-y-1/2 w-48 h-40">
+      <div className="absolute bottom-4 right-6 w-48 h-40">
         {cards.map((card, i) => {
           const isTop = i === 0;
           return (
@@ -164,7 +164,7 @@ const FeatureShuffler = () => {
               className="absolute w-full p-4 rounded-2xl border border-white/5 bg-background/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col gap-2"
               style={{
                 transform: `translateY(${i * 12}px) scale(${1 - i * 0.05})`,
-                opacity: (1 - i * 0.3) * 0.35,
+                opacity: (1 - i * 0.3) * 0.15,
                 zIndex: 10 - i,
                 boxShadow: 'none'
               }}
