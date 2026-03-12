@@ -21,7 +21,7 @@
     margin-bottom: 8px;
   }
   .header img {
-    height: 36px;
+    height: 48px;
     width: auto;
   }
   h1 { font-size: 1.3rem; color: #1a1a1a; }
@@ -96,22 +96,22 @@
     margin-top: 2px;
   }
 
-  /* Mobile: stack to 2-3 columns or single */
+  /* Mobile */
   @media (max-width: 640px) {
-    .schedule {
-      grid-template-columns: repeat(2, 1fr);
+    body { padding: 12px; }
+    .header {
+      flex-direction: column;
+      text-align: center;
+      gap: 8px;
     }
-    .day-col:last-child {
-      grid-column: span 2;
-    }
-  }
-  @media (max-width: 380px) {
+    .header img { height: 56px; }
+    h1 { font-size: 1.2rem; }
+    .guide { justify-content: center; }
     .schedule {
       grid-template-columns: 1fr;
+      gap: 12px;
     }
-    .day-col:last-child {
-      grid-column: span 1;
-    }
+    .item { font-size: 0.85rem; padding: 10px 8px; }
   }
 
   .footer {
