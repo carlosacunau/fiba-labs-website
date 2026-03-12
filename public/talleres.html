@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talleres Extracurriculares - Scuola Primaria 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 16px;
+  }
+  h1 {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+  }
+  h2 {
+    font-size: 1.1rem;
+    margin: 24px 0 8px;
+    color: #1a1a1a;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    background: #fff;
+    margin-bottom: 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    min-width: 600px;
+  }
+  th {
+    background: #2d2d2d;
+    color: #fff;
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: pre-line;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  .grade { font-weight: 600; font-size: 0.75rem; white-space: nowrap; }
+  .prof { color: #666; font-size: 0.78rem; }
+  .cap { text-align: center; color: #888; font-size: 0.78rem; }
+  .sport-name { font-weight: 500; }
+
+  /* Grade colors */
+  .g-12 { background: #c7e3ff; }
+  .g-34 { background: #ffe0bf; }
+  .g-all { background: #cdf2cd; }
+  .g-13 { background: #b3eded; }
+  .g-4 { background: #ffccb3; }
+
+  /* Guide */
+  .guide {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 24px;
+    font-size: 0.8rem;
+  }
+  .guide-item {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  /* Mobile: card layout */
+  @media (max-width: 640px) {
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    .table-wrap { min-width: 0; box-shadow: none; background: transparent; }
+    table { min-width: 0; }
+    tr {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      padding: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    td { border: none; padding: 2px 0; }
+    td.td-grade { width: 100%; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+    td.td-days { width: 100%; }
+    td.td-days .day-tag {
+      display: inline-block;
+      background: #eee;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin: 2px 4px 2px 0;
+      font-size: 0.78rem;
+    }
+    td.td-prof { width: 100%; color: #888; font-size: 0.78rem; }
+    td.td-cap { display: inline; color: #999; font-size: 0.75rem; }
+    td.td-cap::before { content: " | "; }
+    td:empty { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Talleres Extracurriculares 2026-I</h1>
+<h2>Scuola Primaria</h2>
+
+<div class="guide">
+  <span class="guide-item g-all">1° a 4° (todos)</span>
+  <span class="guide-item g-12">1° y 2°</span>
+  <span class="guide-item g-34">3° y 4°</span>
+  <span class="guide-item g-13">1° a 3°</span>
+  <span class="guide-item g-4">4° solamente</span>
+</div>
+
+<h2>Talleres Deportivos</h2>
+<div class="table-wrap">
+<table id="sports">
+<thead>
+<tr>
+  <th>Disponible para</th>
+  <th>Lun
+16:15-17:45</th>
+  <th>Mar
+16:15-17:45</th>
+  <th>Mié
+14:30-16:00</th>
+  <th>Jue
+16:15-17:45</th>
+  <th>Vie
+14:30-16:00</th>
+  <th>Profesor</th>
+  <th>Min</th>
+  <th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="g-all"><td class="td-grade grade">1° a 4° (todos)</td><td></td><td class="sport-name">Tenis</td><td></td><td class="sport-name">Tenis</td><td></td><td class="prof">Javier Santelices</td><td class="cap">5</td><td class="cap">25</td></tr>
+<tr class="g-12"><td class="td-grade grade">1° y 2° solamente</td><td></td><td></td><td class="sport-name">Mini-Calcio</td><td></td><td class="sport-name">Mini-Calcio</td><td class="prof">Micaela Caprile</td><td class="cap">15</td><td class="cap">40</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td class="sport-name">Gimnasia Artística G1</td><td></td><td class="sport-name">Gimnasia Artística G1</td><td></td><td class="prof">Luis Muñoz</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td></td><td class="sport-name">Natación G1</td><td></td><td class="sport-name">Natación G1</td><td class="prof">Nadya Rebolledo</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td class="sport-name">Mini-Básquetbol</td><td></td><td class="sport-name">Mini-Básquetbol</td><td></td><td class="prof">Ignacio Veloz</td><td class="cap">5</td><td class="cap">25</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td class="sport-name">Mini-Atletismo</td><td></td><td class="sport-name">Mini-Atletismo</td><td></td><td class="prof">Tomás Lastra</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td class="sport-name">Aikido G1</td><td></td><td></td><td></td><td class="prof">Juan Caroca</td><td class="cap">5</td><td class="cap">15</td></tr>
+<tr class="g-13"><td class="td-grade grade">1° a 3°</td><td class="sport-name">Cheerleader / Bailes Trad.</td><td></td><td class="sport-name">Cheerleader / Bailes Trad.</td><td></td><td></td><td class="prof">Josefina Moya</td><td class="cap">5</td><td class="cap">30</td></tr>
+<tr class="g-34"><td class="td-grade grade">3° y 4° solamente</td><td class="sport-name">Fútbol</td><td></td><td class="sport-name">Fútbol</td><td></td><td></td><td class="prof">Sebastián Alamos</td><td class="cap">20</td><td class="cap">45</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td class="sport-name">Gimnasia Artística G2</td><td></td><td class="sport-name">Gimnasia Artística G2</td><td></td><td class="prof">Luis Muñoz</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td class="sport-name">Natación G2</td><td></td><td class="sport-name">Natación G2</td><td></td><td class="prof">Nadya Rebolledo</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td class="sport-name">Bochas</td><td></td><td class="sport-name">Bochas</td><td></td><td></td><td class="prof">Oscar Mellado</td><td class="cap">1</td><td class="cap">25</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td class="sport-name">Básquetbol Damas</td><td></td><td></td><td class="sport-name">Básquetbol Damas</td><td class="prof">Rodrigo Medina</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td class="sport-name">Básquetbol Varones</td><td></td><td></td><td class="sport-name">Básquetbol Varones</td><td class="prof">Rodrigo Medina</td><td class="cap">10</td><td class="cap">30</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td class="sport-name">Vóleibol</td><td></td><td class="sport-name">Vóleibol</td><td></td><td></td><td class="prof">Iván Gutiérrez</td><td class="cap">5</td><td class="cap">25</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td class="sport-name">Atletismo</td><td></td><td class="sport-name">Atletismo</td><td></td><td></td><td class="prof">Eduardo Herrera</td><td class="cap">10</td><td class="cap">40</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td></td><td class="sport-name">Aikido G2</td><td></td><td class="prof">Juan Caroca</td><td class="cap">5</td><td class="cap">15</td></tr>
+<tr class="g-4"><td class="td-grade grade">4° solamente</td><td></td><td class="sport-name">Hip-Hop</td><td></td><td class="sport-name">Hip-Hop</td><td></td><td class="prof">Josefina Moya</td><td class="cap">5</td><td class="cap">20</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Talleres Culturales</h2>
+<div class="table-wrap">
+<table id="cultural">
+<thead>
+<tr>
+  <th>Disponible para</th>
+  <th>Lun
+16:15-17:45</th>
+  <th>Mar
+16:15-17:45</th>
+  <th>Mié
+14:30-16:00</th>
+  <th>Jue
+16:15-17:45</th>
+  <th>Vie
+14:30-16:00</th>
+  <th>Profesor</th>
+  <th>Min</th>
+  <th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="g-all"><td class="td-grade grade">1° a 4° (todos)</td><td class="sport-name">Taller Coral: The Voice</td><td></td><td></td><td></td><td></td><td class="prof">Carolina Aguayo</td><td class="cap">5</td><td class="cap">12</td></tr>
+<tr class="g-all"><td class="td-grade"></td><td></td><td class="sport-name">Técnica y Constr. de Títeres</td><td></td><td></td><td></td><td class="prof">Ítalo Cárcamo</td><td class="cap">5</td><td class="cap">15</td></tr>
+<tr class="g-all"><td class="td-grade"></td><td class="sport-name">Ajedrez</td><td></td><td></td><td></td><td></td><td class="prof">Dennise Jana</td><td class="cap">5</td><td class="cap">15</td></tr>
+<tr class="g-all"><td class="td-grade"></td><td></td><td></td><td class="sport-name">Comics y Dibujo</td><td></td><td></td><td class="prof">Helein González</td><td class="cap">5</td><td class="cap">15</td></tr>
+<tr class="g-12"><td class="td-grade grade">1° y 2° solamente</td><td></td><td></td><td class="sport-name">Arte y Alegría</td><td></td><td></td><td class="prof">Claudia Tapia Rabuco</td><td class="cap">5</td><td class="cap">12</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td></td><td class="sport-name">Taller de Lego G1</td><td></td><td></td><td class="prof">Julia Hernández</td><td class="cap">8</td><td class="cap">20</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td class="sport-name">Motricidad/Bisutería G1</td><td></td><td></td><td></td><td></td><td class="prof">Carolina Alegría</td><td class="cap">5</td><td class="cap">12</td></tr>
+<tr class="g-12"><td class="td-grade"></td><td></td><td></td><td></td><td class="sport-name">Teatro</td><td></td><td class="prof">María Belén Ávila</td><td class="cap">5</td><td class="cap">12</td></tr>
+<tr class="g-34"><td class="td-grade grade">3° y 4° solamente</td><td></td><td class="sport-name">Banda Rock Primaria</td><td></td><td></td><td></td><td class="prof">Giuliano Zolezzi</td><td class="cap">5</td><td class="cap">15</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td></td><td></td><td class="sport-name">Taller de Lego G2</td><td class="prof">Julia Hernández</td><td class="cap">8</td><td class="cap">20</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td></td><td class="sport-name">Motricidad/Bisutería G2</td><td></td><td class="prof">Carolina Alegría</td><td class="cap">5</td><td class="cap">12</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td></td><td class="sport-name">Globoflexia</td><td></td><td class="prof">Jehu Aravena</td><td class="cap">5</td><td class="cap">10</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td class="sport-name">Exploradores del Arte</td><td></td><td></td><td class="prof">Loreto López</td><td class="cap">5</td><td class="cap">12</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td class="sport-name">Arte-Creación y Origami</td><td></td><td></td><td class="prof">Pamela Cavieres</td><td class="cap">5</td><td class="cap">10</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td class="sport-name">Manos Creativas</td><td></td><td></td><td></td><td class="prof">Rossana Muñoz</td><td class="cap">5</td><td class="cap">10</td></tr>
+<tr class="g-34"><td class="td-grade"></td><td></td><td></td><td></td><td class="sport-name">La Ciencia de las Cosas</td><td></td><td class="prof">Margarita Santiago</td><td class="cap">5</td><td class="cap">12</td></tr>
+</tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:#999; font-size:0.7rem; margin-top:24px;">Talleres Extracurriculares Scuola Italiana 2026-I</p>
+
+</body>
+</html>
