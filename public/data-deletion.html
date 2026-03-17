@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Deletion - FIBA Labs</title>
+  <link rel="icon" type="image/png" href="/logo_icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A14;
+      color: #E8E4F0;
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.7;
+      overscroll-behavior: none;
+    }
+    a { color: #8B5CF6; text-decoration: none; transition: color 0.3s; }
+    a:hover { color: #a78bfa; }
+
+    .nav {
+      position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+      z-index: 50; width: 90%; max-width: 64rem;
+      border-radius: 9999px; padding: 1rem 1.5rem;
+      background: rgba(10, 10, 20, 0.6);
+      border: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(24px);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav img { height: 5rem; width: auto; }
+    .nav .back { color: rgba(232,228,240,0.7); font-size: 0.875rem; font-weight: 500; }
+    .nav .back:hover { color: #fff; }
+
+    .container {
+      max-width: 48rem; margin: 0 auto;
+      padding: 10rem 1.5rem 6rem;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: 'Fira Code', monospace; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em; color: #8B5CF6;
+      margin-bottom: 1.5rem;
+    }
+    .badge span { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #8B5CF6; }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+      letter-spacing: -0.02em; color: #fff; margin-bottom: 1rem;
+    }
+    .updated {
+      font-family: 'Fira Code', monospace; font-size: 0.75rem;
+      color: rgba(232,228,240,0.4); margin-bottom: 3rem;
+      padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    h2 {
+      font-size: 1.5rem; font-weight: 700; color: #fff;
+      margin: 3rem 0 1rem; letter-spacing: -0.01em;
+    }
+
+    p, li { color: rgba(232,228,240,0.7); font-size: 1rem; margin-bottom: 1rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.5rem; }
+    li::marker { color: #8B5CF6; }
+
+    .card {
+      background: rgba(24,24,27,0.5); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 1.5rem; padding: 1.5rem; margin: 1.5rem 0;
+    }
+    .card p:last-child { margin-bottom: 0; }
+
+    .highlight {
+      background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 1.5rem; padding: 1.5rem; margin: 1.5rem 0;
+    }
+
+    .footer-bar {
+      max-width: 48rem; margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem; color: rgba(232,228,240,0.3);
+      flex-wrap: wrap; gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/"><img src="/logo.png" alt="FIBA Labs" /></a>
+    <a href="/" class="back">&larr; Back to Home</a>
+  </nav>
+
+  <main class="container">
+    <div class="badge"><span></span> Legal // Data Deletion</div>
+    <h1>Data Deletion Instructions</h1>
+    <p class="updated">Last updated: March 17, 2026</p>
+
+    <p>FIBA Labs respects your right to control your personal data. You can request the deletion of any personal information we hold about you at any time.</p>
+
+    <h2>How to Request Data Deletion</h2>
+
+    <div class="highlight">
+      <p>Send an email to <a href="mailto:privacy@fibalabs.com">privacy@fibalabs.com</a> with the subject line <strong>"Data Deletion Request"</strong> and include:</p>
+      <ol>
+        <li>Your full name.</li>
+        <li>The email address associated with your interactions with us.</li>
+        <li>A description of what data you want deleted (or request full deletion).</li>
+      </ol>
+    </div>
+
+    <h2>What We Delete</h2>
+    <p>Upon receiving your request, we will delete:</p>
+    <ul>
+      <li>Contact information (name, email, phone number).</li>
+      <li>Communication history (emails, messages, consultation notes).</li>
+      <li>Any data collected through our website or connected services.</li>
+      <li>WhatsApp or messaging platform interaction data.</li>
+    </ul>
+
+    <h2>Processing Time</h2>
+    <p>We will process your deletion request within <strong>30 days</strong> of receiving it. You will receive a confirmation email once your data has been deleted.</p>
+
+    <h2>Exceptions</h2>
+    <p>We may retain certain data if required by law or for legitimate business purposes such as:</p>
+    <ul>
+      <li>Financial records required for tax or accounting compliance.</li>
+      <li>Data necessary to resolve ongoing disputes or enforce agreements.</li>
+    </ul>
+    <p>If any exception applies, we will inform you of the specific data retained and the reason.</p>
+
+    <h2>Contact</h2>
+    <div class="card">
+      <p><strong>FIBA Labs</strong></p>
+      <p>Email: <a href="mailto:privacy@fibalabs.com">privacy@fibalabs.com</a></p>
+      <p>Website: <a href="https://fibalabs.com">fibalabs.com</a></p>
+    </div>
+  </main>
+
+  <div class="footer-bar">
+    <p>&copy; 2026 FIBA Labs. All rights reserved.</p>
+    <a href="/">Return to Home</a>
+  </div>
+
+</body>
+</html>
