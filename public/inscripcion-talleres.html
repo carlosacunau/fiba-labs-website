@@ -176,6 +176,35 @@
   }
   .btn-secondary:hover { background: #d1d5db; }
 
+  .loading {
+    text-align: center;
+    padding: 40px 16px;
+    color: #888;
+    font-size: 0.9rem;
+  }
+  .spinner {
+    display: inline-block;
+    width: 24px; height: 24px;
+    border: 3px solid #e0e0e0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-msg {
+    text-align: center;
+    padding: 20px 16px;
+    background: #fef2f2;
+    border: 2px solid #fca5a5;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #dc2626;
+    display: none;
+  }
+
   .footer {
     text-align: center;
     color: #999;
@@ -200,13 +229,20 @@
   </div>
 </div>
 
+<div class="loading" id="loadingMsg">
+  <div class="spinner"></div>
+  <div>Cargando inscripciones...</div>
+</div>
+
+<div class="error-msg" id="errorMsg"></div>
+
 <div class="already-enrolled" id="alreadyMsg">
   <strong>Este alumno ya tiene talleres inscritos.</strong>
   <p id="alreadyDetail"></p>
   <button class="btn-secondary" onclick="resetStudent()">Modificar inscripción</button>
 </div>
 
-<div id="formArea">
+<div id="formArea" style="display:none;">
   <label for="studentSelect">Seleccionar alumno/a</label>
   <select id="studentSelect">
     <option value="">-- Elegir alumno/a --</option>
@@ -237,6 +273,10 @@
 <p class="footer">Talleres Extracurriculares Scuola Italiana 2026-I</p>
 
 <script>
+// ====== REPLACE THIS URL after deploying the Apps Script ======
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo28cMNmphkSLzh7OFpqnX1gq9o5Qr_2-9Ax96P0YzRfqx5j-zV5oYkHH1_HN4egxRrg/exec';
+// ==============================================================
+
 const STUDENTS = [
   "Federico Acuña Bendeck",
   "Rafael José Andrighetti Perotti",
@@ -298,14 +338,20 @@ const WORKSHOPS = {
   ]
 };
 
-const STORAGE_KEY = 'talleres_inscripciones_4b';
+let enrollments = {};
 let selected = [];
 
-function getEnrollments() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-}
-function saveEnrollments(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+// Fetch all enrollments on load
+async function init() {
+  try {
+    const res = await fetch(SCRIPT_URL);
+    enrollments = await res.json();
+  } catch (err) {
+    console.error('Error loading enrollments:', err);
+    enrollments = {};
+  }
+  document.getElementById('loadingMsg').style.display = 'none';
+  document.getElementById('formArea').style.display = 'block';
 }
 
 // Populate student dropdown
@@ -319,9 +365,9 @@ STUDENTS.forEach(s => {
 
 sel.addEventListener('change', function() {
   const student = this.value;
-  const enrollments = getEnrollments();
   const alreadyMsg = document.getElementById('alreadyMsg');
   const wsSection = document.getElementById('workshopSection');
+  document.getElementById('errorMsg').style.display = 'none';
 
   if (!student) {
     alreadyMsg.style.display = 'none';
@@ -345,14 +391,11 @@ sel.addEventListener('change', function() {
 });
 
 function resetStudent() {
-  const student = sel.value;
-  if (!student) return;
-  const enrollments = getEnrollments();
-  delete enrollments[student];
-  saveEnrollments(enrollments);
   document.getElementById('alreadyMsg').style.display = 'none';
   document.getElementById('workshopSection').style.display = 'block';
-  selected = [];
+  const student = sel.value;
+  // Pre-select their current workshops so they can modify
+  selected = enrollments[student] ? [...enrollments[student]] : [];
   renderWorkshops();
   updateCounter();
 }
@@ -400,19 +443,39 @@ function updateCounter() {
   document.getElementById('submitBtn').disabled = selected.length === 0;
 }
 
-function submitEnrollment() {
+async function submitEnrollment() {
   const student = sel.value;
   if (!student || selected.length === 0) return;
 
-  const enrollments = getEnrollments();
-  enrollments[student] = [...selected];
-  saveEnrollments(enrollments);
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
 
-  document.getElementById('formArea').style.display = 'none';
-  document.getElementById('successMsg').style.display = 'block';
-  document.getElementById('successStudent').textContent = student;
-  document.getElementById('successWorkshops').textContent = selected.join('  +  ');
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ student, workshops: [...selected] }),
+    });
+    await res.json();
+
+    // Update local cache
+    enrollments[student] = [...selected];
+
+    document.getElementById('formArea').style.display = 'none';
+    document.getElementById('alreadyMsg').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('successStudent').textContent = student;
+    document.getElementById('successWorkshops').textContent = selected.join('  +  ');
+  } catch (err) {
+    console.error('Error saving enrollment:', err);
+    document.getElementById('errorMsg').textContent = 'Error al guardar. Intenta de nuevo.';
+    document.getElementById('errorMsg').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Inscribir';
+  }
 }
+
+init();
 </script>
 </body>
 </html>
