@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscritos por Taller - 4° Básico 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .header img { height: 48px; width: auto; }
+  h1 { font-size: 1.3rem; color: #1a1a1a; }
+  h2 { font-size: 1.1rem; margin: 24px 0 10px; color: #1a1a1a; }
+
+  .stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0 24px;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-size: 0.85rem;
+  }
+  .stat-card strong { font-size: 1.3rem; color: #2563eb; display: block; }
+
+  .schedule {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .ws-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  .ws-header {
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ws-header .badge {
+    background: rgba(0,0,0,0.15);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+  }
+  .ws-meta {
+    padding: 0 12px 6px;
+    font-size: 0.72rem;
+    color: #666;
+  }
+  .ws-students {
+    padding: 4px 12px 12px;
+  }
+  .ws-students .student {
+    padding: 5px 0;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .ws-students .student:last-child { border-bottom: none; }
+  .ws-empty {
+    padding: 12px;
+    font-size: 0.78rem;
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* Category colors */
+  .cat-deportivo { background: #dbeafe; }
+  .cat-cultural { background: #fef3c7; }
+
+  .no-data {
+    text-align: center;
+    padding: 48px 16px;
+    color: #999;
+    font-size: 0.95rem;
+  }
+
+  .actions {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .btn-link:hover { background: #1d4ed8; }
+  .btn-danger {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  .btn-danger:hover { background: #fecaca; }
+
+  .footer {
+    text-align: center;
+    color: #999;
+    font-size: 0.7rem;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .header { flex-direction: column; text-align: center; gap: 8px; }
+    .header img { height: 56px; }
+    .schedule { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="/logo.png" alt="Scuola">
+  <div>
+    <h1>Inscritos por Taller</h1>
+    <div style="font-size:0.85rem;color:#666;">4° Básico - Scuola Primaria 2026-I</div>
+  </div>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="actions">
+  <a href="/inscripcion-talleres.html" class="btn-link">Inscribir alumno</a>
+  <span class="btn-danger" onclick="clearAll()">Borrar todo</span>
+</div>
+
+<div id="noData" class="no-data" style="display:none;">
+  No hay inscripciones aún.<br>
+  <a href="/inscripcion-talleres.html" style="color:#2563eb;">Ir a inscribir</a>
+</div>
+
+<h2 id="depTitle" style="display:none;">Talleres Deportivos</h2>
+<div class="schedule" id="deportivos"></div>
+
+<h2 id="culTitle" style="display:none;">Talleres Culturales</h2>
+<div class="schedule" id="culturales"></div>
+
+<p class="footer">Talleres Extracurriculares Scuola Italiana 2026-I</p>
+
+<script>
+const WORKSHOPS = {
+  deportivos: [
+    { name: "Fútbol", prof: "Sebastián Alamos", days: "Lun + Mié" },
+    { name: "Bochas", prof: "Oscar Mellado", days: "Lun + Mié" },
+    { name: "Vóleibol", prof: "Iván Gutiérrez", days: "Lun + Mié" },
+    { name: "Atletismo", prof: "Eduardo Herrera", days: "Lun + Mié" },
+    { name: "Tenis", prof: "Javier Santelices", days: "Mar + Jue" },
+    { name: "Gimnasia Artística G2", prof: "Luis Muñoz", days: "Mar + Jue" },
+    { name: "Natación G2", prof: "Nadya Rebolledo", days: "Mar + Jue" },
+    { name: "Básquetbol Damas", prof: "Rodrigo Medina", days: "Mar + Vie" },
+    { name: "Básquetbol Varones", prof: "Rodrigo Medina", days: "Mar + Vie" },
+    { name: "Hip-Hop", prof: "Josefina Moya", days: "Mar + Jue" },
+    { name: "Aikido G2", prof: "Juan Caroca", days: "Jueves" },
+  ],
+  culturales: [
+    { name: "Taller Coral: The Voice", prof: "Carolina Aguayo", days: "Lunes" },
+    { name: "Ajedrez", prof: "Dennise Jana", days: "Lunes" },
+    { name: "Banda Rock Primaria", prof: "Giuliano Zolezzi", days: "Lunes" },
+    { name: "Técnica y Constr. de Títeres", prof: "Ítalo Cárcamo", days: "Martes" },
+    { name: "Manos Creativas", prof: "Rossana Muñoz", days: "Martes" },
+    { name: "Comics y Dibujo", prof: "Helein González", days: "Miércoles" },
+    { name: "Exploradores del Arte", prof: "Loreto López", days: "Miércoles" },
+    { name: "Arte-Creación y Origami", prof: "Pamela Cavieres", days: "Miércoles" },
+    { name: "Teatro", prof: "María Belén Ávila", days: "Jueves" },
+    { name: "Motricidad/Bisutería G2", prof: "Carolina Alegría", days: "Jueves" },
+    { name: "Globoflexia", prof: "Jehu Aravena", days: "Jueves" },
+    { name: "La Ciencia de las Cosas", prof: "Margarita Santiago", days: "Jueves" },
+    { name: "Taller de Lego G2", prof: "Julia Hernández", days: "Viernes" },
+  ]
+};
+
+const STORAGE_KEY = 'talleres_inscripciones_4b';
+
+function getEnrollments() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+function clearAll() {
+  if (confirm('¿Borrar todas las inscripciones? Esta acción no se puede deshacer.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    render();
+  }
+}
+
+function render() {
+  const enrollments = getEnrollments();
+  const students = Object.keys(enrollments);
+
+  // Build reverse map: workshop -> [students]
+  const wsMap = {};
+  students.forEach(student => {
+    enrollments[student].forEach(ws => {
+      if (!wsMap[ws]) wsMap[ws] = [];
+      wsMap[ws].push(student);
+    });
+  });
+
+  // Sort students alphabetically within each workshop
+  Object.values(wsMap).forEach(arr => arr.sort((a, b) => a.localeCompare(b, 'es')));
+
+  if (students.length === 0) {
+    document.getElementById('noData').style.display = 'block';
+    document.getElementById('depTitle').style.display = 'none';
+    document.getElementById('culTitle').style.display = 'none';
+    document.getElementById('stats').innerHTML = '';
+    document.getElementById('deportivos').innerHTML = '';
+    document.getElementById('culturales').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('noData').style.display = 'none';
+
+  // Stats
+  const totalEnrolled = students.length;
+  const totalSlots = students.reduce((sum, s) => sum + enrollments[s].length, 0);
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-card"><strong>${totalEnrolled}</strong>alumnos inscritos</div>
+    <div class="stat-card"><strong>27</strong>alumnos en curso</div>
+    <div class="stat-card"><strong>${totalSlots}</strong>inscripciones totales</div>
+  `;
+
+  // Render each category — only workshops that have enrollments
+  ['deportivos', 'culturales'].forEach(cat => {
+    const container = document.getElementById(cat);
+    const titleEl = document.getElementById(cat === 'deportivos' ? 'depTitle' : 'culTitle');
+    container.innerHTML = '';
+    const catClass = cat === 'deportivos' ? 'cat-deportivo' : 'cat-cultural';
+
+    let hasAny = false;
+    WORKSHOPS[cat].forEach(ws => {
+      const enrolled = wsMap[ws.name] || [];
+      if (enrolled.length === 0) return;
+      hasAny = true;
+
+      const card = document.createElement('div');
+      card.className = 'ws-card';
+      card.innerHTML = `
+        <div class="ws-header ${catClass}">
+          <span>${ws.name}</span>
+          <span class="badge">${enrolled.length}</span>
+        </div>
+        <div class="ws-meta">${ws.prof} · ${ws.days}</div>
+        <div class="ws-students">
+          ${enrolled.map(s => `<div class="student">${s}</div>`).join('')}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    titleEl.style.display = hasAny ? 'block' : 'none';
+  });
+}
+
+render();
+</script>
+</body>
+</html>

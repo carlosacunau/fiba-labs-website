@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscripción Talleres - 4° Básico 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .header img { height: 48px; width: auto; }
+  h1 { font-size: 1.3rem; color: #1a1a1a; }
+  h2 { font-size: 1.1rem; margin: 20px 0 10px; color: #1a1a1a; }
+  .subtitle { font-size: 0.85rem; color: #666; margin-top: 2px; }
+
+  /* Form */
+  label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #fff;
+    margin-bottom: 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .section-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  .hint {
+    font-size: 0.78rem;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .workshop-grid {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .ws-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.85rem;
+  }
+  .ws-option:hover { border-color: #aaa; }
+  .ws-option.selected { border-color: #2563eb; background: #eff6ff; }
+  .ws-option.disabled { opacity: 0.4; cursor: not-allowed; }
+  .ws-option input { display: none; }
+  .ws-check {
+    width: 20px; height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .ws-option.selected .ws-check {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+  .ws-option.selected .ws-check::after {
+    content: '';
+    width: 6px; height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+  }
+  .ws-info { flex: 1; }
+  .ws-name { font-weight: 600; }
+  .ws-detail { font-size: 0.75rem; color: #666; margin-top: 2px; }
+  .ws-day-tag {
+    font-size: 0.68rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .tag-lun { background: #fde68a; }
+  .tag-mar { background: #c7e3ff; }
+  .tag-mie { background: #cdf2cd; }
+  .tag-jue { background: #fecaca; }
+  .tag-vie { background: #e9d5ff; }
+
+  .counter {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 16px;
+    padding: 8px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  .counter strong { color: #2563eb; }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .success {
+    display: none;
+    text-align: center;
+    padding: 32px 16px;
+    background: #f0fdf4;
+    border: 2px solid #86efac;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+  .success h2 { color: #16a34a; margin: 0 0 8px; }
+  .success p { color: #666; font-size: 0.9rem; }
+  .success .chosen { font-weight: 600; color: #333; margin-top: 12px; font-size: 0.95rem; }
+
+  .already-enrolled {
+    display: none;
+    text-align: center;
+    padding: 20px 16px;
+    background: #fefce8;
+    border: 2px solid #fde047;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+  }
+  .already-enrolled strong { color: #854d0e; }
+  .btn-secondary {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #e5e7eb;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: #d1d5db; }
+
+  .footer {
+    text-align: center;
+    color: #999;
+    font-size: 0.7rem;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .header { flex-direction: column; text-align: center; gap: 8px; }
+    .header img { height: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="/logo.png" alt="Scuola">
+  <div>
+    <h1>Inscripción Talleres Extracurriculares</h1>
+    <div class="subtitle">4° Básico - Scuola Primaria 2026-I</div>
+  </div>
+</div>
+
+<div class="already-enrolled" id="alreadyMsg">
+  <strong>Este alumno ya tiene talleres inscritos.</strong>
+  <p id="alreadyDetail"></p>
+  <button class="btn-secondary" onclick="resetStudent()">Modificar inscripción</button>
+</div>
+
+<div id="formArea">
+  <label for="studentSelect">Seleccionar alumno/a</label>
+  <select id="studentSelect">
+    <option value="">-- Elegir alumno/a --</option>
+  </select>
+
+  <div id="workshopSection" style="display:none;">
+    <div class="counter" id="counter">Seleccionados: <strong>0</strong> de 2</div>
+
+    <div class="section-label">Talleres Deportivos</div>
+    <div class="hint">Máximo 2 talleres en total (deportivos + culturales)</div>
+    <div class="workshop-grid" id="deportivos"></div>
+
+    <div class="section-label">Talleres Culturales</div>
+    <div class="workshop-grid" id="culturales"></div>
+
+    <button id="submitBtn" disabled onclick="submitEnrollment()">Inscribir</button>
+  </div>
+</div>
+
+<div class="success" id="successMsg">
+  <h2>Inscripción registrada</h2>
+  <p id="successStudent"></p>
+  <div class="chosen" id="successWorkshops"></div>
+  <br>
+  <button class="btn-secondary" onclick="location.reload()">Inscribir otro alumno</button>
+</div>
+
+<p class="footer">Talleres Extracurriculares Scuola Italiana 2026-I</p>
+
+<script>
+const STUDENTS = [
+  "Federico Acuña Bendeck",
+  "Rafael José Andrighetti Perotti",
+  "Alonso Germán Baeza Villaseca",
+  "Mateo Valerio Blanzieri Vennard",
+  "Emma Bruni Moreno",
+  "Emilia Isidora Bustos Martínez",
+  "Máximo Cavalcante Lamas",
+  "Facundo Corte Labbé",
+  "Rafael Ignacio Cruzat Zúñiga",
+  "Alessia Fernandez Ruz",
+  "Raffaella Guillen Zunino",
+  "Amanda Rafaela Horta Velasco",
+  "Ignacio Ide Salazar",
+  "Eduardo Levrini Montaña",
+  "Ignacia Loose Toro",
+  "Borja León Ortúzar Bass",
+  "Joaquín Ignacio Palma Calvo",
+  "Vittorio Leonida Pedriali Moulia",
+  "José Penniacchiotti Pino",
+  "Emma Scola Bonino",
+  "Amelia Silva Buscaglia",
+  "Matteo Stocchero González",
+  "Agustina Tempesta Dagach",
+  "Amparo Daniella Vicuña Iribarra",
+  "Rafaela Aurora Villegas Santibañez",
+  "Rafaela Tiso",
+  "Matilde Pratelli"
+];
+
+const WORKSHOPS = {
+  deportivos: [
+    { name: "Fútbol", prof: "Sebastián Alamos", days: "Lun + Mié", tag: "tag-lun" },
+    { name: "Bochas", prof: "Oscar Mellado", days: "Lun + Mié", tag: "tag-lun" },
+    { name: "Vóleibol", prof: "Iván Gutiérrez", days: "Lun + Mié", tag: "tag-lun" },
+    { name: "Atletismo", prof: "Eduardo Herrera", days: "Lun + Mié", tag: "tag-lun" },
+    { name: "Tenis", prof: "Javier Santelices", days: "Mar + Jue", tag: "tag-mar" },
+    { name: "Gimnasia Artística G2", prof: "Luis Muñoz", days: "Mar + Jue", tag: "tag-mar" },
+    { name: "Natación G2", prof: "Nadya Rebolledo", days: "Mar + Jue", tag: "tag-mar" },
+    { name: "Básquetbol Damas", prof: "Rodrigo Medina", days: "Mar + Vie", tag: "tag-mar" },
+    { name: "Básquetbol Varones", prof: "Rodrigo Medina", days: "Mar + Vie", tag: "tag-mar" },
+    { name: "Hip-Hop", prof: "Josefina Moya", days: "Mar + Jue", tag: "tag-mar" },
+    { name: "Aikido G2", prof: "Juan Caroca", days: "Jueves", tag: "tag-jue" },
+  ],
+  culturales: [
+    { name: "Taller Coral: The Voice", prof: "Carolina Aguayo", days: "Lunes", tag: "tag-lun" },
+    { name: "Ajedrez", prof: "Dennise Jana", days: "Lunes", tag: "tag-lun" },
+    { name: "Banda Rock Primaria", prof: "Giuliano Zolezzi", days: "Lunes", tag: "tag-lun" },
+    { name: "Técnica y Constr. de Títeres", prof: "Ítalo Cárcamo", days: "Martes", tag: "tag-mar" },
+    { name: "Manos Creativas", prof: "Rossana Muñoz", days: "Martes", tag: "tag-mar" },
+    { name: "Comics y Dibujo", prof: "Helein González", days: "Miércoles", tag: "tag-mie" },
+    { name: "Exploradores del Arte", prof: "Loreto López", days: "Miércoles", tag: "tag-mie" },
+    { name: "Arte-Creación y Origami", prof: "Pamela Cavieres", days: "Miércoles", tag: "tag-mie" },
+    { name: "Teatro", prof: "María Belén Ávila", days: "Jueves", tag: "tag-jue" },
+    { name: "Motricidad/Bisutería G2", prof: "Carolina Alegría", days: "Jueves", tag: "tag-jue" },
+    { name: "Globoflexia", prof: "Jehu Aravena", days: "Jueves", tag: "tag-jue" },
+    { name: "La Ciencia de las Cosas", prof: "Margarita Santiago", days: "Jueves", tag: "tag-jue" },
+    { name: "Taller de Lego G2", prof: "Julia Hernández", days: "Viernes", tag: "tag-vie" },
+  ]
+};
+
+const STORAGE_KEY = 'talleres_inscripciones_4b';
+let selected = [];
+
+function getEnrollments() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+function saveEnrollments(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+// Populate student dropdown
+const sel = document.getElementById('studentSelect');
+STUDENTS.forEach(s => {
+  const opt = document.createElement('option');
+  opt.value = s;
+  opt.textContent = s;
+  sel.appendChild(opt);
+});
+
+sel.addEventListener('change', function() {
+  const student = this.value;
+  const enrollments = getEnrollments();
+  const alreadyMsg = document.getElementById('alreadyMsg');
+  const wsSection = document.getElementById('workshopSection');
+
+  if (!student) {
+    alreadyMsg.style.display = 'none';
+    wsSection.style.display = 'none';
+    return;
+  }
+
+  if (enrollments[student]) {
+    alreadyMsg.style.display = 'block';
+    document.getElementById('alreadyDetail').textContent =
+      'Talleres: ' + enrollments[student].join(', ');
+    wsSection.style.display = 'none';
+    return;
+  }
+
+  alreadyMsg.style.display = 'none';
+  wsSection.style.display = 'block';
+  selected = [];
+  renderWorkshops();
+  updateCounter();
+});
+
+function resetStudent() {
+  const student = sel.value;
+  if (!student) return;
+  const enrollments = getEnrollments();
+  delete enrollments[student];
+  saveEnrollments(enrollments);
+  document.getElementById('alreadyMsg').style.display = 'none';
+  document.getElementById('workshopSection').style.display = 'block';
+  selected = [];
+  renderWorkshops();
+  updateCounter();
+}
+
+function renderWorkshops() {
+  ['deportivos', 'culturales'].forEach(cat => {
+    const container = document.getElementById(cat);
+    container.innerHTML = '';
+    WORKSHOPS[cat].forEach(ws => {
+      const div = document.createElement('div');
+      div.className = 'ws-option';
+      const isSelected = selected.includes(ws.name);
+      if (isSelected) div.classList.add('selected');
+      if (!isSelected && selected.length >= 2) div.classList.add('disabled');
+
+      div.innerHTML = `
+        <div class="ws-check"></div>
+        <div class="ws-info">
+          <div class="ws-name">${ws.name}</div>
+          <div class="ws-detail">${ws.prof}</div>
+        </div>
+        <span class="ws-day-tag ${ws.tag}">${ws.days}</span>
+      `;
+      div.addEventListener('click', () => toggleWorkshop(ws.name));
+      container.appendChild(div);
+    });
+  });
+}
+
+function toggleWorkshop(name) {
+  const idx = selected.indexOf(name);
+  if (idx >= 0) {
+    selected.splice(idx, 1);
+  } else {
+    if (selected.length >= 2) return;
+    selected.push(name);
+  }
+  renderWorkshops();
+  updateCounter();
+}
+
+function updateCounter() {
+  document.getElementById('counter').innerHTML =
+    `Seleccionados: <strong>${selected.length}</strong> de 2`;
+  document.getElementById('submitBtn').disabled = selected.length === 0;
+}
+
+function submitEnrollment() {
+  const student = sel.value;
+  if (!student || selected.length === 0) return;
+
+  const enrollments = getEnrollments();
+  enrollments[student] = [...selected];
+  saveEnrollments(enrollments);
+
+  document.getElementById('formArea').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('successStudent').textContent = student;
+  document.getElementById('successWorkshops').textContent = selected.join('  +  ');
+}
+</script>
+</body>
+</html>
