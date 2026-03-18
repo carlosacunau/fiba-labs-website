@@ -234,8 +234,6 @@
   <div>Cargando inscripciones...</div>
 </div>
 
-<div class="error-msg" id="errorMsg"></div>
-
 <div class="already-enrolled" id="alreadyMsg">
   <strong>Este alumno ya tiene talleres inscritos.</strong>
   <p id="alreadyDetail"></p>
@@ -258,6 +256,7 @@
     <div class="section-label">Talleres Culturales</div>
     <div class="workshop-grid" id="culturales"></div>
 
+    <div class="error-msg" id="errorMsg"></div>
     <button id="submitBtn" disabled onclick="submitEnrollment()">Inscribir</button>
   </div>
 </div>
@@ -452,13 +451,14 @@ async function submitEnrollment() {
   btn.textContent = 'Guardando...';
 
   try {
-    const res = await fetch(SCRIPT_URL, {
+    await fetch(SCRIPT_URL, {
       method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({ student, workshops: [...selected] }),
     });
-    await res.json();
 
-    // Update local cache
+    // Update local cache (no-cors gives opaque response, but data is written)
     enrollments[student] = [...selected];
 
     document.getElementById('formArea').style.display = 'none';
