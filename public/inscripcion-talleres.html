@@ -451,12 +451,14 @@ async function submitEnrollment() {
   btn.textContent = 'Guardando...';
 
   try {
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ student, workshops: [...selected] }),
+    const params = new URLSearchParams({
+      action: 'enroll',
+      student,
+      w1: selected[0] || '',
+      w2: selected[1] || '',
     });
+    const res = await fetch(SCRIPT_URL + '?' + params.toString());
+    await res.json();
 
     // Update local cache (no-cors gives opaque response, but data is written)
     enrollments[student] = [...selected];

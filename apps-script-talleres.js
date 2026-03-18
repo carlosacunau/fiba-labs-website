@@ -9,9 +9,40 @@
 const SHEET_NAME = 'Inscripciones';
 
 function doGet(e) {
+  const params = e.parameter || {};
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+
+  // Write mode: ?action=enroll&student=...&w1=...&w2=...
+  if (params.action === 'enroll') {
+    const student = params.student;
+    const w1 = params.w1 || '';
+    const w2 = params.w2 || '';
+    const timestamp = new Date().toISOString();
+
+    // Find existing row for this student (overwrite)
+    const data = sheet.getDataRange().getValues();
+    let existingRow = -1;
+    for (let i = 1; i < data.length; i++) {
+      if (data[i][1] === student) {
+        existingRow = i + 1; // 1-indexed
+        break;
+      }
+    }
+
+    const rowData = [timestamp, student, w1, w2];
+    if (existingRow > 0) {
+      sheet.getRange(existingRow, 1, 1, 4).setValues([rowData]);
+    } else {
+      sheet.appendRow(rowData);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'ok', student, workshops: [w1, w2].filter(Boolean) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Read mode (default): return all enrollments
   const data = sheet.getDataRange().getValues();
-  const headers = data[0];
   const rows = data.slice(1);
 
   const enrollments = {};
@@ -28,34 +59,5 @@ function doGet(e) {
 
   return ContentService
     .createTextOutput(JSON.stringify(enrollments))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-  const payload = JSON.parse(e.postData.contents);
-  const { student, workshops } = payload;
-  const timestamp = new Date().toISOString();
-
-  // Find existing row for this student (overwrite)
-  const data = sheet.getDataRange().getValues();
-  let existingRow = -1;
-  for (let i = 1; i < data.length; i++) {
-    if (data[i][1] === student) {
-      existingRow = i + 1; // 1-indexed
-      break;
-    }
-  }
-
-  const rowData = [timestamp, student, workshops[0] || '', workshops[1] || ''];
-
-  if (existingRow > 0) {
-    sheet.getRange(existingRow, 1, 1, 4).setValues([rowData]);
-  } else {
-    sheet.appendRow(rowData);
-  }
-
-  return ContentService
-    .createTextOutput(JSON.stringify({ status: 'ok', student, workshops }))
     .setMimeType(ContentService.MimeType.JSON);
 }
