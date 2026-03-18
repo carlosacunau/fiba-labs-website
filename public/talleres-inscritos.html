@@ -246,11 +246,9 @@ function render() {
 
   // Stats
   const totalEnrolled = students.length;
-  const totalSlots = students.reduce((sum, s) => sum + enrollments[s].length, 0);
   document.getElementById('stats').innerHTML = `
     <div class="stat-card"><strong>${totalEnrolled}</strong>alumnos inscritos</div>
     <div class="stat-card"><strong>27</strong>alumnos en curso</div>
-    <div class="stat-card"><strong>${totalSlots}</strong>inscripciones totales</div>
   `;
 
   // Render each category — only workshops that have enrollments
