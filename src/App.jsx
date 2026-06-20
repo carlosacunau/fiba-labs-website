@@ -118,7 +118,7 @@ const Hero = () => {
         <div className="lg:col-span-7 space-y-8">
           <div className="hero-elem overline flex items-center gap-3">
             <span className="w-8 h-px bg-accent"></span>
-            AI mentoring · Chile &amp; LATAM
+            AI mentoring for executives &amp; their teams
           </div>
           <h1 className="display-serif text-text text-5xl md:text-7xl lg:text-[5.5rem]">
             <span className="hero-elem block">I make executives</span>
@@ -188,7 +188,7 @@ const ways = [
     num: '03',
     label: 'Speaking',
     title: 'A talk that ends with people having used it.',
-    desc: "Keynotes and live workshops for corporate events across LATAM. The audience doesn't just hear about AI. Each person creates something with their own case before they leave the room.",
+    desc: "Keynotes and live workshops for corporate events, in person or remote, anywhere your people are. The audience doesn't just hear about AI. Each person creates something with their own case before they leave the room.",
   },
 ];
 
@@ -290,7 +290,7 @@ const Proof = () => {
             className="absolute inset-0 rounded-2xl border-0"
           />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent z-10">
-            <p className="text-white font-sans font-medium">On stage · corporate events across LATAM</p>
+            <p className="text-white font-sans font-medium">On stage · corporate events and leadership offsites</p>
           </div>
         </div>
       </div>
@@ -371,7 +371,7 @@ const Footer = () => {
         <div className="md:col-span-2">
           <img src="/logo.png" alt="Fiba Labs" className="h-12 w-auto mb-6" />
           <p className="text-muted max-w-sm text-sm leading-relaxed font-sans">
-            AI mentoring for executives and their teams. I help your people use AI without losing the judgment that made them good. Chile and LATAM.
+            AI mentoring for executives and their teams. I help your people use AI without losing the judgment that made them good. Working with leaders across the Americas, in person and remote.
           </p>
         </div>
         <div>
