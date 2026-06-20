@@ -7,17 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0A0A14', // Deep Void
-        primary: '#0A0A14', // Deep Void
-        accent: '#8B5CF6', // Electric Violet
-        recessed: '#4C2D91', // Deep Indigo
-        ghost: '#F0EFF4', // Ghost (from preset D, used as needed)
-        dark: '#18181B', // Graphite
-        text: '#E8E4F0', // Lavender White
+        // Editorial light-mode palette (design-v2)
+        background: '#FAFAF5', // Alabaster / oat paper
+        surface: '#F0EFE9',    // Stone surface
+        line: '#E5E4DE',       // Hairline dividers
+        text: '#2A2825',       // Deep espresso (primary)
+        muted: '#73706B',      // Warm slate (secondary)
+        accent: '#5B4278',     // Muted royal plum
+        // Legacy dark tokens kept so any stray class still resolves
+        primary: '#0A0A14',
+        recessed: '#4C2D91',
+        dark: '#18181B',
       },
       fontFamily: {
-        sans: ['"Space Grotesk"', 'sans-serif'],
-        drama: ['"Instrument Serif"', 'serif'],
+        sans: ['"DM Sans"', 'sans-serif'],
+        drama: ['"Newsreader"', 'serif'],
+        serif: ['"Newsreader"', 'serif'],
         mono: ['"Fira Code"', 'monospace'],
       },
       borderRadius: {
