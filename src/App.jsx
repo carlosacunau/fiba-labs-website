@@ -10,6 +10,28 @@ const BOOK_LINK = 'https://cal.com/REPLACE_ME';
 const LINKEDIN = 'https://www.linkedin.com/in/carlosacunau/';
 const EMAIL = 'carlos@fibalabs.com';
 
+// Photo slot: shows a labeled placeholder until the real image loads; hides
+// the label on success, hides the (broken) img on error so the label stays.
+const Photo = ({ src, alt, label, className = '', imgClassName = '' }) => {
+  const [state, setState] = React.useState('loading'); // loading | ok | error
+  return (
+    <div className={`relative overflow-hidden bg-surface border border-line ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover transition-opacity duration-700 ${state === 'ok' ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
+        onLoad={() => setState('ok')}
+        onError={() => setState('error')}
+      />
+      {state !== 'ok' && (
+        <div className="absolute inset-0 flex items-center justify-center text-muted/50 font-mono text-sm pointer-events-none px-4 text-center">
+          {label}
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Small hook: fade/rise reveal on scroll.
 // Uses fromTo so the end-state is explicit (opacity:1) and content can never get
 // stuck invisible if a trigger mis-fires. immediateRender:false keeps content
@@ -118,17 +140,12 @@ const Hero = () => {
 
         {/* Right — portrait */}
         <div className="lg:col-span-5">
-          <div className="hero-photo relative rounded-2xl overflow-hidden aspect-[4/5] bg-surface border border-line">
-            <img
-              src="/portrait.jpg"
-              alt="Carlos Acuña"
-              className="w-full h-full object-cover"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center text-muted/50 font-mono text-sm pointer-events-none">
-              [ environmental portrait ]
-            </div>
-          </div>
+          <Photo
+            src="/portrait.jpg"
+            alt="Carlos Acuña"
+            label="[ environmental portrait ]"
+            className="hero-photo rounded-2xl aspect-[4/5]"
+          />
         </div>
       </div>
     </section>
@@ -265,17 +282,14 @@ const Proof = () => {
     <section ref={ref} id="proof" className="py-24 md:py-32">
       {/* Stage photo band */}
       <div className="reveal max-w-6xl mx-auto px-6 md:px-12">
-        <div className="relative rounded-2xl overflow-hidden aspect-[21/9] bg-surface border border-line">
-          <img
+        <div className="relative rounded-2xl overflow-hidden aspect-[21/9]">
+          <Photo
             src="/stage.jpg"
             alt="Carlos Acuña speaking"
-            className="w-full h-full object-cover"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            label="[ on-stage speaking photo ]"
+            className="absolute inset-0 rounded-2xl border-0"
           />
-          <div className="absolute inset-0 flex items-center justify-center text-muted/50 font-mono text-sm pointer-events-none">
-            [ on-stage speaking photo, full-bleed cinematic crop ]
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/50 to-transparent">
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent z-10">
             <p className="text-white font-sans font-medium">On stage · corporate events across LATAM</p>
           </div>
         </div>
@@ -301,17 +315,13 @@ const About = () => {
     <section ref={ref} id="about" className="px-6 md:px-12 py-24 md:py-32 bg-surface">
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div className="lg:col-span-5">
-          <div className="reveal relative rounded-2xl overflow-hidden aspect-[3/4] bg-background border border-line">
-            <img
-              src="/portrait-bw.jpg"
-              alt="Carlos Acuña"
-              className="w-full h-full object-cover grayscale"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center text-muted/50 font-mono text-sm pointer-events-none">
-              [ b&amp;w portrait ]
-            </div>
-          </div>
+          <Photo
+            src="/portrait-bw.jpg"
+            alt="Carlos Acuña"
+            label="[ b&w portrait ]"
+            className="reveal rounded-2xl aspect-[3/4]"
+            imgClassName="grayscale"
+          />
         </div>
         <div className="lg:col-span-7 space-y-6">
           <p className="reveal overline">About</p>
