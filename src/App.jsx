@@ -99,10 +99,10 @@ const Hero = () => {
             AI mentoring · Chile & LATAM
           </div>
 
-          <h1 className="flex flex-col text-5xl md:text-7xl lg:text-8xl text-white">
+          <h1 className="flex flex-col text-4xl md:text-6xl lg:text-7xl text-white">
             <span className="hero-elem heading-sans">I make executives</span>
-            <span className="hero-elem heading-sans">and their teams</span>
-            <span className="hero-elem text-drama text-accent mt-2 ml-1">AI-fluent.</span>
+            <span className="hero-elem heading-sans font-normal text-text/60 text-2xl md:text-3xl lg:text-4xl mt-1">(and their teams)</span>
+            <span className="hero-elem text-drama text-accent mt-3 ml-1">AI-fluent.</span>
           </h1>
 
           <p className="hero-elem text-lg md:text-xl text-text/80 max-w-xl font-light font-sans mt-8 mb-12 border-l border-white/20 pl-6 py-2">
@@ -156,7 +156,7 @@ const Shift = () => {
   }, []);
 
   return (
-    <section ref={container} id="shift" className="relative py-32 md:py-48 px-6 md:px-16 overflow-hidden">
+    <section ref={container} id="shift" className="relative py-24 md:py-32 px-6 md:px-16 overflow-hidden">
       <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.03]"
         style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80)', backgroundAttachment: 'fixed' }}
@@ -168,7 +168,7 @@ const Shift = () => {
           <span className="text-white">A month later nobody uses any of it.</span>
         </p>
 
-        <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[1.1]">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl leading-[1.1]">
           {['I', 'teach', 'your', 'people', 'to'].map((w) => (
             <span key={w} className="phil-word inline-block mr-3 md:mr-5 heading-sans">{w}</span>
           ))}
@@ -178,7 +178,7 @@ const Shift = () => {
           ))}
         </h2>
 
-        <p className="text-lg text-text/60 max-w-2xl mx-auto font-sans">
+        <p className="text-lg text-text/75 max-w-2xl mx-auto font-sans">
           We start from the work your team already does, not a generic curriculum. Everyone leaves with something they built and will actually keep using.
         </p>
       </div>
@@ -214,8 +214,8 @@ const Ways = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <h2 className="text-xs uppercase tracking-widest text-accent font-mono mb-4">// Ways to work together</h2>
-          <p className="text-3xl md:text-5xl heading-sans max-w-3xl text-white">One product, fit to where you are.</p>
-          <p className="text-text/60 mt-6 max-w-2xl font-sans">Everything is custom. We scope it on a call. Below is the shape of the work.</p>
+          <p className="text-2xl md:text-4xl heading-sans max-w-3xl text-white">One product, fit to where you are.</p>
+          <p className="text-text/75 mt-6 max-w-2xl font-sans">Everything is custom. We scope it on a call. Below is the shape of the work.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -225,8 +225,8 @@ const Ways = () => {
               <div key={w.label} className="bg-[#111116] border border-white/5 rounded-[2rem] p-8 flex flex-col hover:border-white/10 transition-colors">
                 <Icon className="w-7 h-7 text-accent mb-6" />
                 <div className="data-mono text-accent mb-3">{w.label}</div>
-                <h3 className="text-2xl font-bold text-white tracking-tight mb-4 leading-snug">{w.title}</h3>
-                <p className="text-sm text-text/60 leading-relaxed">{w.desc}</p>
+                <h3 className="text-xl font-bold text-white tracking-tight mb-4 leading-snug">{w.title}</h3>
+                <p className="text-sm text-text/75 leading-relaxed">{w.desc}</p>
               </div>
             );
           })}
@@ -237,7 +237,7 @@ const Ways = () => {
           <Wrench className="w-7 h-7 text-accent shrink-0" />
           <div className="flex-1">
             <h3 className="text-lg font-bold text-white mb-2">When mentoring turns into building</h3>
-            <p className="text-sm text-text/60 max-w-3xl leading-relaxed">
+            <p className="text-sm text-text/75 max-w-3xl leading-relaxed">
               Sometimes the right move isn't to teach a process, it's to build it. When a project earns it, I build it with you, or bring a team to implement. Scoped per audit, never sold off a menu.
             </p>
           </div>
@@ -300,7 +300,7 @@ const Method = () => {
   return (
     <section ref={containerRef} id="method" className="relative py-24 px-6 md:px-16 pb-48">
       <div className="mb-24 max-w-2xl mx-auto text-center sticky top-24 z-0">
-        <h2 className="text-5xl md:text-7xl text-drama text-white mb-6">How I work</h2>
+        <h2 className="text-4xl md:text-6xl text-drama text-white mb-6">How I work</h2>
         <p className="text-text/60 font-sans">No dependence on me when we're done. The skill stays in the room.</p>
       </div>
 
@@ -314,8 +314,8 @@ const Method = () => {
             <div className="w-full bg-[#111116] border border-white/5 rounded-3xl p-8 md:p-16 flex flex-col md:flex-row shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] items-center justify-between gap-12">
               <div className="flex-1 space-y-6">
                 <div className="data-mono text-accent text-lg">Step_{step.num}</div>
-                <h3 className="text-4xl md:text-5xl font-bold tracking-tight">{step.title}</h3>
-                <p className="text-lg md:text-xl text-text/60 max-w-md">{step.desc}</p>
+                <h3 className="text-3xl md:text-4xl font-bold tracking-tight">{step.title}</h3>
+                <p className="text-lg md:text-xl text-text/75 max-w-md">{step.desc}</p>
               </div>
               <div className="flex-1 flex justify-center items-center opacity-80 mix-blend-screen scale-125 md:scale-150">
                 {step.graphic}
@@ -353,8 +353,8 @@ const Proof = () => {
 
           <div>
             <h2 className="text-xs uppercase tracking-widest text-accent font-mono mb-4">// Where I've worked</h2>
-            <p className="text-3xl md:text-4xl heading-sans text-white mb-6">22 years inside enterprise, across LATAM.</p>
-            <p className="text-text/60 leading-relaxed mb-10 max-w-lg">
+            <p className="text-2xl md:text-3xl heading-sans text-white mb-6">22 years inside enterprise, across LATAM.</p>
+            <p className="text-text/75 leading-relaxed mb-10 max-w-lg">
               Two decades in sales, channel and customer success at the companies that built enterprise tech. I've sat on the side of the table your team is on now. That's what I bring to the AI shift: not the hype, the judgment.
             </p>
             <div className="grid grid-cols-3 gap-x-6 gap-y-6">
@@ -392,7 +392,7 @@ const About = () => {
 
         <div className="lg:col-span-3 space-y-6">
           <h2 className="text-xs uppercase tracking-widest text-accent font-mono">// About</h2>
-          <h3 className="text-3xl md:text-5xl heading-sans text-white leading-tight">
+          <h3 className="text-2xl md:text-4xl heading-sans text-white leading-tight">
             I spent a career selling and delivering enterprise tech. Now I help leaders use the next wave of it.
           </h3>
           <p className="text-text/70 leading-relaxed">
@@ -415,11 +415,11 @@ const About = () => {
 // --- 8. FINAL CTA ---
 const FinalCTA = () => {
   return (
-    <section className="py-32 px-6 md:px-16 bg-black relative text-center">
+    <section className="py-24 px-6 md:px-16 bg-black relative text-center">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
       <div className="max-w-3xl mx-auto space-y-8">
-        <h2 className="text-4xl md:text-6xl heading-sans text-white">Where do we start?</h2>
-        <p className="text-text/60 text-lg font-sans">
+        <h2 className="text-3xl md:text-5xl heading-sans text-white">Where do we start?</h2>
+        <p className="text-text/75 text-lg font-sans">
           Thirty minutes. No pitch. We work out whether this makes sense for you or your team, and what to do first.
         </p>
         <div className="flex flex-wrap justify-center gap-4 pt-4">

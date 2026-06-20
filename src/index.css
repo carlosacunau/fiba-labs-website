@@ -39,7 +39,7 @@
     @apply font-drama italic tracking-tight leading-none;
   }
   .heading-sans {
-    @apply font-sans font-bold tracking-tight leading-none;
+    @apply font-sans font-semibold tracking-tight leading-none;
   }
   .data-mono {
     @apply font-mono text-sm uppercase tracking-wider text-accent;
