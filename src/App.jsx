@@ -126,7 +126,7 @@ const Hero = () => {
             <span className="hero-elem block italic text-accent">AI-fluent.</span>
           </h1>
           <p className="hero-elem text-lg text-muted max-w-md leading-relaxed font-sans">
-            You earned your seat on judgment, relationships and context. AI doesn't replace any of that. I help your people use it so the work gets sharper and faster, in your voice, not the tool's.
+            Your judgment is the part AI can't replace. I help leaders and their teams put it to work with AI, so the output stays yours and the work gets faster. Twenty-two years in enterprise, no hype.
           </p>
           <div className="hero-elem flex flex-wrap items-center gap-6 pt-2">
             <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-8 py-4 rounded-full bg-accent text-background text-base">
@@ -175,20 +175,20 @@ const ways = [
   {
     num: '01',
     label: 'Workshops',
-    title: 'Your team builds something real, in the room.',
-    desc: "Hands-on sessions for your team or leadership group. We pick a process you run every week and walk out with an assistant or workflow that handles it. For events and offsites too.",
+    title: 'Your team leaves with something they built.',
+    desc: "Hands-on sessions for a team or a leadership group. We take a process you run every week and walk out with an assistant or workflow that handles it. Not slides about AI, the actual thing, working.",
   },
   {
     num: '02',
     label: '1:1 Mentoring',
-    title: 'Your use case, your output, over a few weeks.',
-    desc: "For a leader who wants to get genuinely good. We work your real cases until the output stops sounding like AI and starts sounding like you. You leave with your own assistants configured.",
+    title: 'For the leader who wants to get genuinely good.',
+    desc: "A few weeks on your real cases, not a curriculum. We work them until the output stops sounding like AI and starts sounding like you. You leave with your own assistants built and the judgment to keep going.",
   },
   {
     num: '03',
     label: 'Speaking',
-    title: 'A talk that ends with people having used it.',
-    desc: "Keynotes and live workshops for corporate events, in person or remote, anywhere your people are. The audience doesn't just hear about AI. Each person creates something with their own case before they leave the room.",
+    title: 'A talk where the room actually uses it.',
+    desc: "Keynotes and live workshops for events and offsites, in person or remote. Your audience doesn't just hear about AI. Each person makes something with their own case before they leave.",
   },
 ];
 
@@ -198,9 +198,9 @@ const Ways = () => {
     <section ref={ref} id="work" className="px-6 md:px-12 py-24 md:py-32">
       <div className="max-w-4xl mx-auto">
         <div className="reveal mb-16 md:mb-20">
-          <p className="overline mb-5">Ways to work together</p>
-          <h2 className="display-serif text-3xl md:text-5xl text-text">One product, fit to where you are.</h2>
-          <p className="text-muted mt-5 max-w-xl font-sans leading-relaxed">Everything is custom. We scope it on a call. Below is the shape of the work.</p>
+          <p className="overline mb-5">How we work together</p>
+          <h2 className="display-serif text-3xl md:text-5xl text-text">Three ways in. One outcome.</h2>
+          <p className="text-muted mt-5 max-w-xl font-sans leading-relaxed">Your people, fluent enough to keep building without me. Everything is built around your real work, so we scope it on a call.</p>
         </div>
 
         <div>
@@ -225,7 +225,7 @@ const Ways = () => {
             <div className="md:col-span-9">
               <h3 className="font-drama text-xl md:text-2xl text-text mb-3 leading-snug">When mentoring turns into building</h3>
               <p className="text-muted leading-relaxed font-sans max-w-2xl">
-                Sometimes the right move isn't to teach a process, it's to build it. When a project earns it, I build it with you, or bring a team to implement. Scoped per audit, never sold off a menu.
+                Sometimes the right move isn't to teach a process, it's to build it. When a project earns it, I build it with you, or bring a team to implement. Scoped case by case, never sold off a menu.
               </p>
             </div>
           </div>
