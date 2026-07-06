@@ -287,7 +287,7 @@ const quotes = [
   },
   {
     text: "We greenlit it on the first call, no hesitation. Carlos gave us an outbound engine we actually own, not a black box we'd depend on him for.",
-    attr: 'Nadav Dabas · CEO, Dots Eco',
+    attr: 'Daniel Madrid · Co-Founder & CGO, Dots Eco',
   },
   {
     text: "For the first time the AI actually read my real drawings instead of inventing something off-scale. Carlos taught us to plug it into the tools we already use every day.",
