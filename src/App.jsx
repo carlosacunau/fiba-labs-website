@@ -5,8 +5,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Single source of truth for the booking link. Swap with the real Cal.com URL before merge.
-const BOOK_LINK = 'https://cal.com/REPLACE_ME';
+// Single source of truth for the booking link.
+const BOOK_LINK = 'https://cal.com/carlos-acuna/30min';
 const LINKEDIN = 'https://www.linkedin.com/in/carlosacunau/';
 const EMAIL = 'carlos@fibalabs.com';
 
@@ -88,8 +88,9 @@ const Navbar = () => {
           <img src="/logo.png" alt="Fiba Labs" className="h-12 w-auto" />
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-muted">
-          <a href="#work" className="hover:text-text transition-colors">Ways to work</a>
-          <a href="#method" className="hover:text-text transition-colors">How I work</a>
+          <a href="#work" className="hover:text-text transition-colors">Workshops</a>
+          <a href="#proof" className="hover:text-text transition-colors">Speaking</a>
+          <a href="#work" className="hover:text-text transition-colors">Mentoring</a>
           <a href="#about" className="hover:text-text transition-colors">About</a>
         </div>
         <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-5 py-2.5 rounded-full bg-accent text-background text-sm">
@@ -118,7 +119,7 @@ const Hero = () => {
         <div className="lg:col-span-7 space-y-8">
           <div className="hero-elem overline flex items-center gap-3">
             <span className="w-8 h-px bg-accent"></span>
-            AI mentoring for executives &amp; their teams
+            AI strategy mentor · Workshops · Speaking
           </div>
           <h1 className="display-serif text-text text-5xl md:text-7xl lg:text-[5.5rem]">
             <span className="hero-elem block">I make executives</span>
@@ -126,7 +127,7 @@ const Hero = () => {
             <span className="hero-elem block italic text-accent">AI-fluent.</span>
           </h1>
           <p className="hero-elem text-lg text-muted max-w-md leading-relaxed font-sans">
-            Your judgment is the part AI can't replace. I help leaders and their teams put it to work with AI, so the output stays yours and the work gets faster. Twenty-two years in enterprise, no hype.
+            Custom workshops, keynotes, and private mentoring, all built on your team's real work. Twenty-two years inside enterprise. No hype, no generic curriculum.
           </p>
           <div className="hero-elem flex flex-wrap items-center gap-6 pt-2">
             <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-8 py-4 rounded-full bg-accent text-background text-base">
@@ -158,12 +159,12 @@ const Shift = () => {
   return (
     <section ref={ref} id="shift" className="px-6 md:px-12 py-24 md:py-32 bg-surface">
       <div className="max-w-4xl mx-auto text-center space-y-8">
-        <p className="reveal overline">The problem with most AI training</p>
+        <p className="reveal overline">Why another AI training won't fix it</p>
         <h2 className="reveal display-serif text-3xl md:text-5xl text-text leading-tight">
-          It teaches tools and prompts. A month later, <span className="italic text-accent">nobody uses any of it.</span>
+          Everyone bought the tools. Almost nobody <span className="italic text-accent">changed how they work.</span>
         </h2>
         <p className="reveal text-lg text-muted max-w-2xl mx-auto leading-relaxed font-sans">
-          I start from the work your team already does, not a generic curriculum. Everyone leaves with something they built, and the judgment to keep using it.
+          Generic training teaches prompts and demos, and a month later nobody uses any of it. The gap was never the tool. It's judgment: knowing what to hand to AI, what to keep, and how to tell good output from plausible output. I start from the work your team already does, and everyone leaves with something they built.
         </p>
       </div>
     </section>
@@ -175,20 +176,23 @@ const ways = [
   {
     num: '01',
     label: 'Workshops',
-    title: 'Your team leaves with something they built.',
-    desc: "Hands-on sessions for a team or a leadership group. We take a process you run every week and walk out with an assistant or workflow that handles it. Not slides about AI, the actual thing, working.",
+    format: 'Half-day to multi-week · your team, your cases · in person or remote',
+    title: "Built on your team's real work, not a curriculum.",
+    desc: "Custom mentoring workshops for a team or a leadership group. We take a process you run every week and walk out with an assistant or a workflow that handles it. Not slides about AI: the actual thing, working, in your company's vocabulary. Formats range from a half-day intensive to a multi-week program.",
   },
   {
     num: '02',
-    label: '1:1 Mentoring',
-    title: 'For the leader who wants to get genuinely good.',
-    desc: "A few weeks on your real cases, not a curriculum. We work them until the output stops sounding like AI and starts sounding like you. You leave with your own assistants built and the judgment to keep going.",
+    label: 'Speaking',
+    format: 'Keynotes · conference workshops · leadership offsites',
+    title: 'A talk the room is still using a month later.',
+    desc: "Keynotes and hands-on conference sessions, in person or remote, in English or Spanish. I don't do tool demos or hype tours. I give leaders a way to think about AI they can defend in their next board conversation, and when the format allows, everyone builds something with their own case before leaving the room.",
   },
   {
     num: '03',
-    label: 'Speaking',
-    title: 'A talk where the room actually uses it.',
-    desc: "Keynotes and live workshops for events and offsites, in person or remote. Your audience doesn't just hear about AI. Each person makes something with their own case before they leave.",
+    label: 'Private mentoring',
+    format: '1:1 · a few weeks · your real cases',
+    title: 'For the leader who wants to get genuinely good.',
+    desc: "A few weeks working your real cases, not a curriculum. We work them until the output stops sounding like AI and starts sounding like you. You leave with your own assistants built and the judgment to keep going without me.",
   },
 ];
 
@@ -211,7 +215,8 @@ const Ways = () => {
                 <span className="overline pt-1">{w.label}</span>
               </div>
               <div className="md:col-span-9">
-                <h3 className="font-drama text-2xl md:text-3xl text-text mb-3 leading-snug">{w.title}</h3>
+                <h3 className="font-drama text-2xl md:text-3xl text-text mb-2 leading-snug">{w.title}</h3>
+                <p className="font-mono text-xs text-accent/80 mb-3 tracking-wide">{w.format}</p>
                 <p className="text-muted leading-relaxed font-sans max-w-2xl">{w.desc}</p>
               </div>
             </div>
@@ -274,25 +279,54 @@ const Method = () => {
   );
 };
 
-// --- PROOF (full-bleed stage photo + floating logos) ---
+// --- PROOF (stage editorial split + testimonials + logos) ---
+const quotes = [
+  {
+    text: "Carlos built us an order system that just runs. What used to be manual every day now handles itself, and we get a clean summary without lifting a finger.",
+    attr: 'Onyx Armor · custom body armor',
+  },
+  {
+    text: "We greenlit it on the first call, no hesitation. Carlos gave us an outbound engine we actually own, not a black box we'd depend on him for.",
+    attr: 'Nadav Dabas · CEO, Dots Eco',
+  },
+  {
+    text: "For the first time the AI actually read my real drawings instead of inventing something off-scale. Carlos taught us to plug it into the tools we already use every day.",
+    attr: 'Stefano Bedín · BMAA architecture studio',
+  },
+];
+
 const Proof = () => {
   const ref = useReveal();
   const logos = ['IBM', 'Oracle', 'Red Hat', 'Trellix', 'Vertiv', 'Remote.com'];
   return (
     <section ref={ref} id="proof" className="py-24 md:py-32">
-      {/* Stage photo band */}
+      {/* Stage editorial split: caption left, real speaking photo right */}
       <div className="reveal max-w-6xl mx-auto px-6 md:px-12">
-        <div className="relative rounded-2xl overflow-hidden aspect-[21/9]">
-          <Photo
-            src="/stage.jpg"
-            alt="Carlos Acuña speaking"
-            label="[ on-stage speaking photo ]"
-            className="absolute inset-0 rounded-2xl border-0"
-          />
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/60 to-transparent z-10">
-            <p className="text-white font-sans font-medium">On stage · corporate events and leadership offsites</p>
+        <div className="rounded-2xl border border-line bg-gradient-to-br from-background to-surface overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-4 p-8 md:p-12">
+          <div className="flex-1 space-y-4 text-center md:text-left">
+            <p className="overline">On stage</p>
+            <h3 className="display-serif text-2xl md:text-4xl text-text leading-tight">Keynotes and hands-on workshops that a room keeps using.</h3>
+            <p className="text-muted font-sans leading-relaxed max-w-md mx-auto md:mx-0">Corporate events and leadership offsites, in person or remote, in English or Spanish.</p>
+          </div>
+          <div className="w-2/3 max-w-[240px] md:w-auto md:h-[340px] shrink-0">
+            <Photo
+              src="/stage.jpg"
+              alt="Carlos Acuña speaking"
+              label="[ speaking photo ]"
+              className="rounded-2xl aspect-[3/5] md:h-full md:aspect-auto shadow-xl"
+            />
           </div>
         </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="reveal max-w-6xl mx-auto px-6 md:px-12 mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {quotes.map((q) => (
+          <figure key={q.attr} className="border border-line rounded-2xl p-7 bg-surface flex flex-col justify-between">
+            <blockquote className="text-text font-sans leading-relaxed text-[15px]">"{q.text}"</blockquote>
+            <figcaption className="overline mt-6 not-italic">{q.attr}</figcaption>
+          </figure>
+        ))}
       </div>
 
       {/* Logos */}
@@ -326,13 +360,13 @@ const About = () => {
         <div className="lg:col-span-7 space-y-6">
           <p className="reveal overline">About</p>
           <blockquote className="reveal display-serif text-3xl md:text-4xl text-text border-l-2 border-accent pl-6 leading-tight">
-            Twenty-two years inside enterprise. Now I help leaders use the next wave of it.
+            Twenty-two years inside enterprise. Now I mentor the leaders navigating what comes next.
           </blockquote>
           <p className="reveal text-muted leading-relaxed font-sans">
             I'm Carlos Acuña, founder of Fiba Labs. Two decades across IBM, Oracle, Red Hat, Trellix, Vertiv and Remote.com, in sales, channel and customer success throughout Latin America. Dual MBA, engineering background, and a long habit of being in the room where the decision gets made.
           </p>
           <p className="reveal text-muted leading-relaxed font-sans">
-            What that taught me: the problem is never the tool. It's whether people have the judgment and the habit to use it well. That's what I mentor. I don't adapt frameworks from somewhere else. I build them for how teams here actually work.
+            What that taught me: the problem is never the tool. It's whether people have the judgment and the habit to use it well. That's what I mentor. Not a framework adapted from somewhere else, but strategy and fluency built around how your team actually works.
           </p>
         </div>
       </div>
@@ -347,7 +381,7 @@ const FinalCTA = () => {
       <div className="max-w-2xl mx-auto space-y-8">
         <h2 className="display-serif text-4xl md:text-6xl">Where do we start?</h2>
         <p className="text-background/80 text-lg font-sans leading-relaxed">
-          Thirty minutes. No pitch. We work out whether this makes sense for you or your team, and what to do first.
+          Thirty minutes, no pitch. We work out whether this makes sense for you, your team, or your event, and what to do first.
         </p>
         <div className="flex flex-wrap justify-center gap-4 pt-2">
           <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-10 py-4 rounded-full bg-background text-text text-base">
@@ -371,15 +405,15 @@ const Footer = () => {
         <div className="md:col-span-2">
           <img src="/logo.png" alt="Fiba Labs" className="h-12 w-auto mb-6" />
           <p className="text-muted max-w-sm text-sm leading-relaxed font-sans">
-            AI mentoring for executives and their teams. I help your people use AI without losing the judgment that made them good. Working with leaders across the Americas, in person and remote.
+            AI strategy mentor for executives and their teams. Custom workshops, keynotes, and private mentoring, built on real work. Across the Americas, in person and remote.
           </p>
         </div>
         <div>
           <h4 className="overline mb-6">Explore</h4>
           <ul className="space-y-3 text-sm text-muted font-sans">
-            <li><a href="#work" className="hover:text-text transition-colors">Ways to work</a></li>
-            <li><a href="#method" className="hover:text-text transition-colors">How I work</a></li>
-            <li><a href="#proof" className="hover:text-text transition-colors">Where I've worked</a></li>
+            <li><a href="#work" className="hover:text-text transition-colors">Workshops</a></li>
+            <li><a href="#proof" className="hover:text-text transition-colors">Speaking</a></li>
+            <li><a href="#work" className="hover:text-text transition-colors">Mentoring</a></li>
             <li><a href="#about" className="hover:text-text transition-colors">About</a></li>
           </ul>
         </div>
