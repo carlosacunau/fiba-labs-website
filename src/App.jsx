@@ -333,18 +333,26 @@ const Proof = () => {
   );
 };
 
-// --- ENTERPRISE (real logo strip on full dark band) ---
+// --- ENTERPRISE (full-color logo row, light band) ---
+const enterpriseLogos = [
+  { src: '/logos/ibm.png', alt: 'IBM', h: 'h-8 md:h-9' },
+  { src: '/logos/oracle.png', alt: 'Oracle', h: 'h-4 md:h-5' },
+  { src: '/logos/sun.png', alt: 'Sun Microsystems', h: 'h-9 md:h-11' },
+  { src: '/logos/remote.png', alt: 'Remote', h: 'h-5 md:h-6' },
+  { src: '/logos/trellix.png', alt: 'Trellix', h: 'h-5 md:h-6' },
+  { src: '/logos/vertiv.png', alt: 'Vertiv', h: 'h-5 md:h-6' },
+];
 const Enterprise = () => {
   const ref = useReveal();
   return (
-    <section ref={ref} className="px-6 md:px-12 py-16 md:py-20 bg-[#0d0b18]">
+    <section ref={ref} className="px-6 md:px-12 py-16 md:py-20 bg-surface">
       <div className="reveal max-w-5xl mx-auto text-center">
-        <p className="overline mb-10 text-background/50">Twenty-two years inside enterprise</p>
-        <img
-          src="/enterprise-logos.png"
-          alt="Remote · Vertiv · Oracle · Trellix · IBM"
-          className="w-full max-w-3xl mx-auto h-auto"
-        />
+        <p className="overline mb-12 text-muted">Twenty-two years inside enterprise</p>
+        <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-11 gap-y-8">
+          {enterpriseLogos.map((l) => (
+            <img key={l.alt} src={l.src} alt={l.alt} className={`${l.h} w-auto object-contain opacity-80 hover:opacity-100 transition-opacity`} />
+          ))}
+        </div>
       </div>
     </section>
   );
