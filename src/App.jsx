@@ -284,7 +284,7 @@ const Method = () => {
 const quotes = [
   {
     text: "Carlos built us an order system that just runs. What used to be manual every day now handles itself, and we get a clean summary without lifting a finger.",
-    attr: 'Onyx Armor · custom body armor',
+    attr: 'Javier Rocha · President, Onyx Armor',
   },
   {
     text: "We greenlit it on the first call, no hesitation. Carlos gave us an outbound engine we actually own, not a black box we'd depend on him for.",
@@ -298,7 +298,6 @@ const quotes = [
 
 const Proof = () => {
   const ref = useReveal();
-  const logos = ['IBM', 'Oracle', 'Red Hat', 'Trellix', 'Vertiv', 'Remote.com'];
   return (
     <section ref={ref} id="proof" className="py-24 md:py-32">
       {/* Stage editorial split: caption left, real speaking photo right */}
@@ -330,14 +329,22 @@ const Proof = () => {
         ))}
       </div>
 
-      {/* Logos */}
-      <div className="reveal max-w-5xl mx-auto px-6 md:px-12 mt-16 text-center">
-        <p className="overline mb-10">Twenty-two years inside enterprise</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-          {logos.map((l) => (
-            <span key={l} className="font-drama text-xl md:text-2xl text-text/70">{l}</span>
-          ))}
-        </div>
+    </section>
+  );
+};
+
+// --- ENTERPRISE (real logo strip on full dark band) ---
+const Enterprise = () => {
+  const ref = useReveal();
+  return (
+    <section ref={ref} className="px-6 md:px-12 py-16 md:py-20 bg-[#0d0b18]">
+      <div className="reveal max-w-5xl mx-auto text-center">
+        <p className="overline mb-10 text-background/50">Twenty-two years inside enterprise</p>
+        <img
+          src="/enterprise-logos.png"
+          alt="Remote · Vertiv · Oracle · Trellix · IBM"
+          className="w-full max-w-3xl mx-auto h-auto"
+        />
       </div>
     </section>
   );
@@ -439,6 +446,7 @@ export default function App() {
       <Method />
       <Proof />
       <About />
+      <Enterprise />
       <FinalCTA />
       <Footer />
     </div>
