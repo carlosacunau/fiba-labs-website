@@ -146,6 +146,7 @@ const Hero = () => {
             alt="Carlos Acuña"
             label="[ environmental portrait ]"
             className="hero-photo rounded-2xl aspect-[4/5]"
+            imgClassName="grayscale"
           />
         </div>
       </div>
@@ -342,30 +343,21 @@ const Proof = () => {
   );
 };
 
-// --- ABOUT (B&W portrait + blockquote bio) ---
+// --- ABOUT (editorial pull-quote + bio, no portrait) ---
 const About = () => {
   const ref = useReveal();
   return (
     <section ref={ref} id="about" className="px-6 md:px-12 py-24 md:py-32 bg-surface">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div className="lg:col-span-5">
-          <Photo
-            src="/portrait-bw.jpg"
-            alt="Carlos Acuña"
-            label="[ b&w portrait ]"
-            className="reveal rounded-2xl aspect-[3/4]"
-            imgClassName="grayscale"
-          />
-        </div>
-        <div className="lg:col-span-7 space-y-6">
-          <p className="reveal overline">About</p>
-          <blockquote className="reveal display-serif text-3xl md:text-4xl text-text border-l-2 border-accent pl-6 leading-tight">
-            Twenty-two years inside enterprise. Now I mentor the leaders navigating what comes next.
-          </blockquote>
-          <p className="reveal text-muted leading-relaxed font-sans">
+      <div className="max-w-3xl mx-auto space-y-8">
+        <p className="reveal overline">About</p>
+        <blockquote className="reveal display-serif text-3xl md:text-5xl text-text border-l-2 border-accent pl-6 md:pl-8 leading-tight">
+          Twenty-two years inside enterprise. Now I mentor the leaders navigating what comes next.
+        </blockquote>
+        <div className="reveal space-y-6 max-w-2xl">
+          <p className="text-muted leading-relaxed font-sans md:text-lg">
             I'm Carlos Acuña, founder of Fiba Labs. Two decades across IBM, Oracle, Red Hat, Trellix, Vertiv and Remote.com, in sales, channel and customer success throughout Latin America. Dual MBA, engineering background, and a long habit of being in the room where the decision gets made.
           </p>
-          <p className="reveal text-muted leading-relaxed font-sans">
+          <p className="text-muted leading-relaxed font-sans md:text-lg">
             What that taught me: the problem is never the tool. It's whether people have the judgment and the habit to use it well. That's what I mentor. Not a framework adapted from somewhere else, but strategy and fluency built around how your team actually works.
           </p>
         </div>
