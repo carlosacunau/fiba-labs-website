@@ -345,9 +345,9 @@ const enterpriseLogos = [
 const Enterprise = () => {
   const ref = useReveal();
   return (
-    <section ref={ref} className="px-6 md:px-12 py-16 md:py-20 bg-surface">
+    <section ref={ref} className="px-6 md:px-12 pt-4 md:pt-6 pb-16 md:pb-24 bg-surface">
       <div className="reveal max-w-5xl mx-auto text-center">
-        <p className="overline mb-12 text-muted">Twenty-two years inside enterprise</p>
+        <p className="overline mb-10 text-muted">Twenty-two years inside enterprise</p>
         <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-11 gap-y-8">
           {enterpriseLogos.map((l) => (
             <img key={l.alt} src={l.src} alt={l.alt} className={`${l.h} w-auto object-contain opacity-80 hover:opacity-100 transition-opacity`} />
@@ -362,7 +362,7 @@ const Enterprise = () => {
 const About = () => {
   const ref = useReveal();
   return (
-    <section ref={ref} id="about" className="px-6 md:px-12 py-24 md:py-32 bg-surface">
+    <section ref={ref} id="about" className="px-6 md:px-12 pt-24 md:pt-32 pb-12 md:pb-16 bg-surface">
       <div className="max-w-3xl mx-auto space-y-8">
         <p className="reveal overline">About</p>
         <blockquote className="reveal display-serif text-3xl md:text-5xl text-text border-l-2 border-accent pl-6 md:pl-8 leading-tight">
@@ -370,7 +370,7 @@ const About = () => {
         </blockquote>
         <div className="reveal space-y-6 max-w-2xl">
           <p className="text-muted leading-relaxed font-sans md:text-lg">
-            I'm Carlos Acuña, founder of Fiba Labs. Two decades across IBM, Oracle, Red Hat, Trellix, Vertiv and Remote.com, in sales, channel and customer success throughout Latin America. Dual MBA, engineering background, and a long habit of being in the room where the decision gets made.
+            I'm Carlos Acuña, founder of Fiba Labs. Two decades across IBM, Sun Microsystems, Oracle, Red Hat, Trellix, Vertiv and Remote.com, in sales, channel and customer success throughout Latin America. Dual MBA, engineering background, and a long habit of being in the room where the decision gets made.
           </p>
           <p className="text-muted leading-relaxed font-sans md:text-lg">
             What that taught me: the problem is never the tool. It's whether people have the judgment and the habit to use it well. That's what I mentor. Not a framework adapted from somewhere else, but strategy and fluency built around how your team actually works.
