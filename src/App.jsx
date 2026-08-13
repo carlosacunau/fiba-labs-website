@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
+import { LanguageProvider, useLang } from './LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,7 +63,24 @@ const useReveal = (selector = '.reveal') => {
 };
 
 // --- NAVBAR ---
+// EN/ES switcher. Shows the language you'd switch TO, so the label is always
+// an action rather than a status.
+const LangToggle = ({ className = '' }) => {
+  const { lang, toggleLang, t } = useLang();
+  return (
+    <button
+      type="button"
+      onClick={toggleLang}
+      aria-label={t.langToggleLabel}
+      className={`font-mono text-xs tracking-wide text-muted hover:text-text transition-colors border border-line rounded-full px-3 py-1.5 ${className}`}
+    >
+      {lang === 'es' ? 'EN' : 'ES'}
+    </button>
+  );
+};
+
 const Navbar = () => {
+  const { t } = useLang();
   const navRef = useRef(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -88,14 +106,17 @@ const Navbar = () => {
           <img src="/logo.png" alt="Fiba Labs" className="h-12 w-auto" />
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-muted">
-          <a href="#work" className="hover:text-text transition-colors">Workshops</a>
-          <a href="#proof" className="hover:text-text transition-colors">Speaking</a>
-          <a href="#work" className="hover:text-text transition-colors">Mentoring</a>
-          <a href="#about" className="hover:text-text transition-colors">About</a>
+          <a href="#work" className="hover:text-text transition-colors">{t.nav.workshops}</a>
+          <a href="#proof" className="hover:text-text transition-colors">{t.nav.speaking}</a>
+          <a href="#work" className="hover:text-text transition-colors">{t.nav.mentoring}</a>
+          <a href="#about" className="hover:text-text transition-colors">{t.nav.about}</a>
         </div>
-        <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-5 py-2.5 rounded-full bg-accent text-background text-sm">
-          <span className="relative z-10 flex items-center gap-1.5">Book <ArrowUpRight className="w-4 h-4" /></span>
-        </a>
+        <div className="flex items-center gap-3">
+          <LangToggle />
+          <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-5 py-2.5 rounded-full bg-accent text-background text-sm">
+            <span className="relative z-10 flex items-center gap-1.5">{t.nav.book} <ArrowUpRight className="w-4 h-4" /></span>
+          </a>
+        </div>
       </div>
     </nav>
   );
@@ -103,6 +124,7 @@ const Navbar = () => {
 
 // --- HERO ---
 const Hero = () => {
+  const { t } = useLang();
   const container = useRef(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -119,22 +141,22 @@ const Hero = () => {
         <div className="lg:col-span-7 space-y-8">
           <div className="hero-elem overline flex items-center gap-3">
             <span className="w-8 h-px bg-accent"></span>
-            AI strategy mentor · Workshops · Speaking
+            {t.hero.overline}
           </div>
           <h1 className="display-serif text-text text-5xl md:text-7xl lg:text-[5.5rem]">
-            <span className="hero-elem block">I make executives</span>
-            <span className="hero-elem block text-muted font-sans font-normal text-2xl md:text-3xl tracking-normal mt-3 mb-1">(and their teams)</span>
-            <span className="hero-elem block italic text-accent">AI-fluent.</span>
+            <span className="hero-elem block">{t.hero.h1a}</span>
+            <span className="hero-elem block text-muted font-sans font-normal text-2xl md:text-3xl tracking-normal mt-3 mb-1">{t.hero.h1b}</span>
+            <span className="hero-elem block italic text-accent">{t.hero.h1c}</span>
           </h1>
           <p className="hero-elem text-lg text-muted max-w-md leading-relaxed font-sans">
-            Custom workshops, keynotes, and private mentoring, all built on your team's real work. Twenty-two years inside enterprise. No hype, no generic curriculum.
+            {t.hero.sub}
           </p>
           <div className="hero-elem flex flex-wrap items-center gap-6 pt-2">
             <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-8 py-4 rounded-full bg-accent text-background text-base">
-              <span className="relative z-10 font-medium">Book a call</span>
+              <span className="relative z-10 font-medium">{t.hero.cta}</span>
             </a>
             <a href="#work" className="text-sm text-muted hover:text-text transition-colors flex items-center gap-1">
-              See how I work <ArrowUpRight className="w-4 h-4" />
+              {t.hero.secondary} <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -143,8 +165,8 @@ const Hero = () => {
         <div className="lg:col-span-5">
           <Photo
             src="/portrait.jpg"
-            alt="Carlos Acuña"
-            label="[ environmental portrait ]"
+            alt={t.hero.portraitAlt}
+            label={t.hero.portraitLabel}
             className="hero-photo rounded-2xl aspect-[4/5]"
             imgClassName="grayscale"
           />
@@ -156,16 +178,17 @@ const Hero = () => {
 
 // --- THE SHIFT ---
 const Shift = () => {
+  const { t } = useLang();
   const ref = useReveal();
   return (
     <section ref={ref} id="shift" className="px-6 md:px-12 py-24 md:py-32 bg-surface">
       <div className="max-w-4xl mx-auto text-center space-y-8">
-        <p className="reveal overline">Why another AI training won't fix it</p>
+        <p className="reveal overline">{t.shift.overline}</p>
         <h2 className="reveal display-serif text-3xl md:text-5xl text-text leading-tight">
-          Everyone bought the tools. Almost nobody <span className="italic text-accent">changed how they work.</span>
+          {t.shift.h2a}<span className="italic text-accent">{t.shift.h2b}</span>
         </h2>
         <p className="reveal text-lg text-muted max-w-2xl mx-auto leading-relaxed font-sans">
-          Generic training teaches prompts and demos, and a month later nobody uses any of it. The gap was never the tool. It's judgment: knowing what to hand to AI, what to keep, and how to tell good output from plausible output. I start from the work your team already does, and everyone leaves with something they built.
+          {t.shift.body}
         </p>
       </div>
     </section>
@@ -173,43 +196,20 @@ const Shift = () => {
 };
 
 // --- WAYS TO WORK (cascading numbered list) ---
-const ways = [
-  {
-    num: '01',
-    label: 'Workshops',
-    format: 'Half-day to multi-week · your team, your cases · in person or remote',
-    title: "Built on your team's real work, not a curriculum.",
-    desc: "Custom mentoring workshops for a team or a leadership group. We take a process you run every week and walk out with an assistant or a workflow that handles it. Not slides about AI: the actual thing, working, in your company's vocabulary. Formats range from a half-day intensive to a multi-week program.",
-  },
-  {
-    num: '02',
-    label: 'Speaking',
-    format: 'Keynotes · conference workshops · leadership offsites',
-    title: 'A talk the room is still using a month later.',
-    desc: "Keynotes and hands-on conference sessions, in person or remote, in English or Spanish. I don't do tool demos or hype tours. I give leaders a way to think about AI they can defend in their next board conversation, and when the format allows, everyone builds something with their own case before leaving the room.",
-  },
-  {
-    num: '03',
-    label: 'Private mentoring',
-    format: '1:1 · a few weeks · your real cases',
-    title: 'For the leader who wants to get genuinely good.',
-    desc: "A few weeks working your real cases, not a curriculum. We work them until the output stops sounding like AI and starts sounding like you. You leave with your own assistants built and the judgment to keep going without me.",
-  },
-];
-
 const Ways = () => {
+  const { t } = useLang();
   const ref = useReveal();
   return (
     <section ref={ref} id="work" className="px-6 md:px-12 py-24 md:py-32">
       <div className="max-w-4xl mx-auto">
         <div className="reveal mb-16 md:mb-20">
-          <p className="overline mb-5">How we work together</p>
-          <h2 className="display-serif text-3xl md:text-5xl text-text">Three ways in. One outcome.</h2>
-          <p className="text-muted mt-5 max-w-xl font-sans leading-relaxed">Your people, fluent enough to keep building without me. Everything is built around your real work, so we scope it on a call.</p>
+          <p className="overline mb-5">{t.ways.overline}</p>
+          <h2 className="display-serif text-3xl md:text-5xl text-text">{t.ways.h2}</h2>
+          <p className="text-muted mt-5 max-w-xl font-sans leading-relaxed">{t.ways.intro}</p>
         </div>
 
         <div>
-          {ways.map((w) => (
+          {t.ways.items.map((w) => (
             <div key={w.num} className="reveal grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-10 border-t border-line">
               <div className="md:col-span-3 flex items-baseline gap-4">
                 <span className="display-serif text-4xl text-accent">{w.num}</span>
@@ -226,12 +226,12 @@ const Ways = () => {
           <div className="reveal grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-10 border-t border-line">
             <div className="md:col-span-3 flex items-baseline gap-4">
               <span className="display-serif text-4xl text-muted/50">+</span>
-              <span className="overline pt-1">Building</span>
+              <span className="overline pt-1">{t.ways.buildLabel}</span>
             </div>
             <div className="md:col-span-9">
-              <h3 className="font-drama text-xl md:text-2xl text-text mb-3 leading-snug">When mentoring turns into building</h3>
+              <h3 className="font-drama text-xl md:text-2xl text-text mb-3 leading-snug">{t.ways.buildTitle}</h3>
               <p className="text-muted leading-relaxed font-sans max-w-2xl">
-                Sometimes the right move isn't to teach a process, it's to build it. When a project earns it, I build it with you, or bring a team to implement. Scoped case by case, never sold off a menu.
+                {t.ways.buildDesc}
               </p>
             </div>
           </div>
@@ -239,9 +239,9 @@ const Ways = () => {
 
         <div className="reveal mt-16 text-center">
           <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-10 py-4 rounded-full bg-accent text-background text-base">
-            <span className="relative z-10 font-medium flex items-center gap-2">Book a call <ArrowUpRight className="w-5 h-5" /></span>
+            <span className="relative z-10 font-medium flex items-center gap-2">{t.ways.cta} <ArrowUpRight className="w-5 h-5" /></span>
           </a>
-          <p className="text-muted/70 text-sm mt-4 font-mono">30 minutes · no pitch · we figure out if there's a fit</p>
+          <p className="text-muted/70 text-sm mt-4 font-mono">{t.ways.ctaNote}</p>
         </div>
       </div>
     </section>
@@ -249,25 +249,20 @@ const Ways = () => {
 };
 
 // --- HOW I WORK (typographic timeline) ---
-const steps = [
-  { num: '01', title: 'Map', desc: "We find the handful of places your team loses the most time. That's where AI earns its keep, and where we start." },
-  { num: '02', title: 'Build', desc: "We build the first assistants together, live, in your vocabulary and inside your constraints. Real cases, not toy examples." },
-  { num: '03', title: 'Adopt', desc: "Your people learn the logic, not just the result, so they keep building after I'm gone. We measure the time actually saved." },
-];
-
 const Method = () => {
+  const { t } = useLang();
   const ref = useReveal();
   return (
     <section ref={ref} id="method" className="px-6 md:px-12 py-24 md:py-32 bg-surface">
       <div className="max-w-5xl mx-auto">
         <div className="reveal text-center mb-16 md:mb-24">
-          <p className="overline mb-5">How I work</p>
-          <h2 className="display-serif text-4xl md:text-6xl text-text">Three steps. <span className="italic text-accent">No dependence on me.</span></h2>
-          <p className="text-muted mt-5 font-sans">The skill stays in the room when I leave.</p>
+          <p className="overline mb-5">{t.method.overline}</p>
+          <h2 className="display-serif text-4xl md:text-6xl text-text">{t.method.h2a}<span className="italic text-accent">{t.method.h2b}</span></h2>
+          <p className="text-muted mt-5 font-sans">{t.method.lede}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden">
-          {steps.map((s) => (
+          {t.method.steps.map((s) => (
             <div key={s.num} className="reveal bg-background p-8 md:p-10">
               <div className="display-serif text-5xl text-accent mb-6">{s.num}</div>
               <h3 className="font-drama text-2xl text-text mb-3">{s.title}</h3>
@@ -281,22 +276,8 @@ const Method = () => {
 };
 
 // --- PROOF (stage editorial split + testimonials + logos) ---
-const quotes = [
-  {
-    text: "Carlos built us an order system that just runs. What used to be manual every day now handles itself, and we get a clean summary without lifting a finger.",
-    attr: 'Javier Rocha · President, Onyx Armor',
-  },
-  {
-    text: "We greenlit it on the first call, no hesitation. Carlos gave us an outbound engine we actually own, not a black box we'd depend on him for.",
-    attr: 'Daniel Madrid · Co-Founder & CGO, Dots Eco',
-  },
-  {
-    text: "For the first time the AI actually read my real drawings instead of inventing something off-scale. Carlos taught us to plug it into the tools we already use every day.",
-    attr: 'Stefano Bedín · BMAA architecture studio',
-  },
-];
-
 const Proof = () => {
+  const { t } = useLang();
   const ref = useReveal();
   return (
     <section ref={ref} id="proof" className="py-24 md:py-32">
@@ -304,15 +285,15 @@ const Proof = () => {
       <div className="reveal max-w-6xl mx-auto px-6 md:px-12">
         <div className="rounded-2xl border border-line bg-gradient-to-br from-background to-surface overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-4 p-8 md:p-12">
           <div className="flex-1 space-y-4 text-center md:text-left">
-            <p className="overline">On stage</p>
-            <h3 className="display-serif text-2xl md:text-4xl text-text leading-tight">Keynotes and hands-on workshops that a room keeps using.</h3>
-            <p className="text-muted font-sans leading-relaxed max-w-md mx-auto md:mx-0">Corporate events and leadership offsites, in person or remote, in English or Spanish.</p>
+            <p className="overline">{t.proof.overline}</p>
+            <h3 className="display-serif text-2xl md:text-4xl text-text leading-tight">{t.proof.h3}</h3>
+            <p className="text-muted font-sans leading-relaxed max-w-md mx-auto md:mx-0">{t.proof.body}</p>
           </div>
           <div className="w-2/3 max-w-[240px] md:w-auto md:h-[340px] shrink-0">
             <Photo
               src="/stage.jpg"
-              alt="Carlos Acuña speaking"
-              label="[ speaking photo ]"
+              alt={t.proof.stageAlt}
+              label={t.proof.stageLabel}
               className="rounded-2xl aspect-[3/5] md:h-full md:aspect-auto shadow-xl"
             />
           </div>
@@ -321,7 +302,7 @@ const Proof = () => {
 
       {/* Testimonials */}
       <div className="reveal max-w-6xl mx-auto px-6 md:px-12 mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {quotes.map((q) => (
+        {t.proof.quotes.map((q) => (
           <figure key={q.attr} className="border border-line rounded-2xl p-7 bg-surface flex flex-col justify-between">
             <blockquote className="text-text font-sans leading-relaxed text-[15px]">"{q.text}"</blockquote>
             <figcaption className="overline mt-6 not-italic">{q.attr}</figcaption>
@@ -343,11 +324,12 @@ const enterpriseLogos = [
   { src: '/logos/vertiv.png', alt: 'Vertiv', h: 'h-5 md:h-6' },
 ];
 const Enterprise = () => {
+  const { t } = useLang();
   const ref = useReveal();
   return (
     <section ref={ref} className="px-6 md:px-12 pt-4 md:pt-6 pb-16 md:pb-24 bg-surface">
       <div className="reveal max-w-5xl mx-auto text-center">
-        <p className="overline mb-10 text-muted">Twenty-two years inside enterprise</p>
+        <p className="overline mb-10 text-muted">{t.enterprise.overline}</p>
         <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-11 gap-y-8">
           {enterpriseLogos.map((l) => (
             <img key={l.alt} src={l.src} alt={l.alt} className={`${l.h} w-auto object-contain opacity-80 hover:opacity-100 transition-opacity`} />
@@ -360,20 +342,21 @@ const Enterprise = () => {
 
 // --- ABOUT (editorial pull-quote + bio, no portrait) ---
 const About = () => {
+  const { t } = useLang();
   const ref = useReveal();
   return (
     <section ref={ref} id="about" className="px-6 md:px-12 pt-24 md:pt-32 pb-12 md:pb-16 bg-surface">
       <div className="max-w-3xl mx-auto space-y-8">
-        <p className="reveal overline">About</p>
+        <p className="reveal overline">{t.about.overline}</p>
         <blockquote className="reveal display-serif text-3xl md:text-5xl text-text border-l-2 border-accent pl-6 md:pl-8 leading-tight">
-          Twenty-two years inside enterprise. Now I mentor the leaders navigating what comes next.
+          {t.about.quote}
         </blockquote>
         <div className="reveal space-y-6 max-w-2xl">
           <p className="text-muted leading-relaxed font-sans md:text-lg">
-            I'm Carlos Acuña, founder of Fiba Labs. Two decades across IBM, Sun Microsystems, Oracle, Red Hat, Trellix, Vertiv and Remote.com, in sales, channel and customer success throughout Latin America. Dual MBA, engineering background, and a long habit of being in the room where the decision gets made.
+            {t.about.p1}
           </p>
           <p className="text-muted leading-relaxed font-sans md:text-lg">
-            What that taught me: the problem is never the tool. It's whether people have the judgment and the habit to use it well. That's what I mentor. Not a framework adapted from somewhere else, but strategy and fluency built around how your team actually works.
+            {t.about.p2}
           </p>
         </div>
       </div>
@@ -383,19 +366,20 @@ const About = () => {
 
 // --- FINAL CTA (plum interruption) ---
 const FinalCTA = () => {
+  const { t } = useLang();
   return (
     <section className="px-6 md:px-12 py-28 md:py-36 bg-accent text-background text-center">
       <div className="max-w-2xl mx-auto space-y-8">
-        <h2 className="display-serif text-4xl md:text-6xl">Where do we start?</h2>
+        <h2 className="display-serif text-4xl md:text-6xl">{t.finalCta.h2}</h2>
         <p className="text-background/80 text-lg font-sans leading-relaxed">
-          Thirty minutes, no pitch. We work out whether this makes sense for you, your team, or your event, and what to do first.
+          {t.finalCta.body}
         </p>
         <div className="flex flex-wrap justify-center gap-4 pt-2">
           <a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-10 py-4 rounded-full bg-background text-text text-base">
-            <span className="relative z-10 font-semibold">Book a call</span>
+            <span className="relative z-10 font-semibold">{t.finalCta.primary}</span>
           </a>
           <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="btn-magnetic px-10 py-4 rounded-full border border-background/30 text-background text-base hover:bg-background/10">
-            <span className="relative z-10 font-medium">Reach me on LinkedIn</span>
+            <span className="relative z-10 font-medium">{t.finalCta.secondary}</span>
           </a>
         </div>
         <a href={`mailto:${EMAIL}`} className="inline-block text-background/70 hover:text-background transition-colors font-mono text-sm pt-2">{EMAIL}</a>
@@ -406,38 +390,40 @@ const FinalCTA = () => {
 
 // --- FOOTER ---
 const Footer = () => {
+  const { t } = useLang();
   return (
     <footer className="px-6 md:px-12 pt-20 pb-10 bg-background border-t border-line">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div className="md:col-span-2">
           <img src="/logo.png" alt="Fiba Labs" className="h-12 w-auto mb-6" />
           <p className="text-muted max-w-sm text-sm leading-relaxed font-sans">
-            AI strategy mentor for executives and their teams. Custom workshops, keynotes, and private mentoring, built on real work. Across the Americas, in person and remote.
+            {t.footer.desc}
           </p>
         </div>
         <div>
-          <h4 className="overline mb-6">Explore</h4>
+          <h4 className="overline mb-6">{t.footer.exploreHead}</h4>
           <ul className="space-y-3 text-sm text-muted font-sans">
-            <li><a href="#work" className="hover:text-text transition-colors">Workshops</a></li>
-            <li><a href="#proof" className="hover:text-text transition-colors">Speaking</a></li>
-            <li><a href="#work" className="hover:text-text transition-colors">Mentoring</a></li>
-            <li><a href="#about" className="hover:text-text transition-colors">About</a></li>
+            <li><a href="#work" className="hover:text-text transition-colors">{t.nav.workshops}</a></li>
+            <li><a href="#proof" className="hover:text-text transition-colors">{t.nav.speaking}</a></li>
+            <li><a href="#work" className="hover:text-text transition-colors">{t.nav.mentoring}</a></li>
+            <li><a href="#about" className="hover:text-text transition-colors">{t.nav.about}</a></li>
           </ul>
         </div>
         <div>
-          <h4 className="overline mb-6">Connect</h4>
+          <h4 className="overline mb-6">{t.footer.connectHead}</h4>
           <ul className="space-y-3 text-sm text-muted font-sans">
-            <li><a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Book a call</a></li>
+            <li><a href={BOOK_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">{t.footer.book}</a></li>
             <li><a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">LinkedIn</a></li>
             <li><a href={`mailto:${EMAIL}`} className="hover:text-text transition-colors">{EMAIL}</a></li>
           </ul>
         </div>
       </div>
       <div className="max-w-6xl mx-auto pt-8 border-t border-line flex flex-col md:flex-row justify-between items-center text-xs text-muted font-sans gap-4">
-        <p>&copy; {new Date().getFullYear()} Fiba Labs · Santiago, Chile</p>
-        <div className="flex gap-6">
-          <a href="/privacy.html" className="hover:text-text transition-colors">Privacy</a>
-          <a href="/terms.html" className="hover:text-text transition-colors">Terms</a>
+        <p>&copy; {new Date().getFullYear()} {t.footer.base}</p>
+        <div className="flex items-center gap-6">
+          <a href="/privacy.html" className="hover:text-text transition-colors">{t.footer.privacy}</a>
+          <a href="/terms.html" className="hover:text-text transition-colors">{t.footer.terms}</a>
+          <LangToggle />
         </div>
       </div>
     </footer>
@@ -446,17 +432,19 @@ const Footer = () => {
 
 export default function App() {
   return (
-    <div className="min-h-screen font-sans selection:bg-accent/20">
-      <Navbar />
-      <Hero />
-      <Shift />
-      <Ways />
-      <Method />
-      <Proof />
-      <About />
-      <Enterprise />
-      <FinalCTA />
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen font-sans selection:bg-accent/20">
+        <Navbar />
+        <Hero />
+        <Shift />
+        <Ways />
+        <Method />
+        <Proof />
+        <About />
+        <Enterprise />
+        <FinalCTA />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
