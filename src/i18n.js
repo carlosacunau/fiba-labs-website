@@ -208,14 +208,14 @@ export const copy = {
           format:
             'Desde media jornada hasta varias semanas · tu equipo, tus casos · presencial o remoto',
           title: 'Construido sobre el trabajo real de tu equipo, no sobre un currículo.',
-          desc: 'Talleres de mentoría a medida para un equipo o un grupo directivo. Tomamos un proceso que corres cada semana y salimos con un asistente o un flujo que lo resuelve. Nada de diapositivas sobre IA: la cosa funcionando de verdad, en el lenguaje de tu empresa. Los formatos van desde un intensivo de media jornada hasta un programa de varias semanas.',
+          desc: 'Talleres de mentoría a medida para un equipo o un grupo directivo. Tomamos un proceso que corres cada semana y salimos con un asistente o un flujo que lo resuelve. Nada de diapositivas sobre IA: la herramienta funcionando de verdad, en el lenguaje de tu empresa. Los formatos van desde un intensivo de media jornada hasta un programa de varias semanas.',
         },
         {
           num: '02',
           label: 'Charlas',
           format: 'Keynotes · talleres en conferencias · encuentros directivos',
           title: 'Una charla que la sala sigue usando un mes después.',
-          desc: 'Keynotes y sesiones prácticas en conferencias, presencial o remoto, en español o en inglés. No hago demos de herramientas ni giras de humo. Le doy a los líderes una forma de pensar la IA que puedan defender en su próxima conversación de directorio, y cuando el formato lo permite, cada persona construye algo con su propio caso antes de salir de la sala.',
+          desc: 'Keynotes y sesiones prácticas en conferencias, presencial o remoto, en español o en inglés. No hago demos de herramientas ni charlas de humo. Le doy a los líderes una forma de pensar la IA que puedan defender en su próxima conversación de directorio, y cuando el formato lo permite, cada persona construye algo con su propio caso antes de salir de la sala.',
         },
         {
           num: '03',
@@ -230,7 +230,7 @@ export const copy = {
       buildDesc:
         'A veces lo correcto no es enseñar un proceso, es construirlo. Cuando un proyecto lo amerita, lo construyo contigo, o traigo un equipo para implementarlo. Se define caso por caso, nunca se vende de un menú.',
       cta: 'Agendar una llamada',
-      ctaNote: '30 minutos · sin pitch · vemos si hay encaje',
+      ctaNote: '30 minutos · sin venta · vemos si hay encaje',
     },
 
     method: {
@@ -293,7 +293,7 @@ export const copy = {
 
     finalCta: {
       h2: '¿Por dónde empezamos?',
-      body: 'Treinta minutos, sin pitch. Vemos si esto tiene sentido para ti, tu equipo o tu evento, y qué hacer primero.',
+      body: 'Treinta minutos, sin venta. Vemos si esto tiene sentido para ti, tu equipo o tu evento, y qué hacer primero.',
       primary: 'Agendar una llamada',
       secondary: 'Escríbeme por LinkedIn',
     },
